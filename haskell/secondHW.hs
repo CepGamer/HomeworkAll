@@ -37,8 +37,7 @@ mysub (a, b) (c, d) = mysum (a, b) (-c, d)
 
 myshift n as = myconcat as (replicate n (0, 1))
 mypad n as = myconcat (replicate n (0, 1)) as
-mynorm [] = []
-mynorm (a:as) = if fst a == 0 then mynorm as else (a:as)
+mynorm as = [(a, b) | (a, b) <- as, a /= 0, b /= 1]
 mydeg as = mylen (mynorm as) - 1
 
 myzip _ [] [] = []
