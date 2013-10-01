@@ -46,7 +46,7 @@ myzip op (a:as) (b:bs) = myconcat [op a b] (myzip op as bs)
 myzip' op as bs = myzip op (mypad (-d) as) (mypad d bs)
   where d = (mylen as) - mylen bs
 
-mydivpol :: [(Int, Int)] -> [(Int, Int)] -> ([(Int, Int)], [(Int, Int)])
+--mydivpol :: [(Int, Int)] -> [(Int, Int)] -> ([(Int, Int)], [(Int, Int)])
 mydivpol as bs = mydiv' (mynorm as) (mynorm bs) []
   where mydiv' a s q | ddif < 0 = (q, a)
                      | otherwise = mydiv' a' s q'
