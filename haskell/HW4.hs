@@ -1,26 +1,27 @@
-data BT a = BT a (BT a, BT a) | None
+data BT a = BT (BT a) a (BT a) | None
 
-myinsert None a = BT a (None, None)
-myinsert (BT a (b, c)) t
-    | t <= a    = BT a (myinsert b t, c)
-    | otherwise = BT a (b, myinsert c t)
-
---(BT 8 (BT 4 (BT 3 (BT 2 (None, None), None), BT 5 (None, None)), BT 10 (BT 9 (None, None), None)))
+myinsert None a = BT None a None
+myinsert (BT l a r) t
+    | t > a    = BT l a $ myinsert r t
+    | otherwise = BT (myinsert l t) a r
 
 myfind None _ = Nothing
-myfind x@(BT a (b, c)) t
+myfind x@(BT l a r) t
     | a == t    = Just x
-    | t < a     = myfind b t
-    | otherwise = myfind c t
-
-isBST (BT a (b, c)) = isBST' b && isBST' c where
-    isBST' (BT _ (None, None)) = True
-    isBST' (BT a (BT b _, BT c _)) = (b <= a) && (c > a)
+    | t < a     = myfind l t
+    | otherwise = myfind r t
 
 elements None = []
-elements (BT a (None, None)) = [a]
-elements (BT a (b, c)) = elements b ++ [a] ++ elements c
+elements (BT None a None) = [a]
+elements b@(BT l a r) = els b [] where
+	els (BT lx x rx) y = els lx $ x:els rx y
+	els _ y = y
+
 
 eqBST None None = True
-eqBST (BT a (b, c)) (BT x (y, z)) = x == a && eqBST b y && eqBST c z
+eqBST (BT l a r) (BT lx x rx) = x == a && eqBST l lx && eqBST r rx
 eqBST _ _ = False
+
+isBST a = isBST' $ elements a where 
+    isBST' (x:p@(y:ys)) = x <= y && isBST' p
+    isBST' _ = True

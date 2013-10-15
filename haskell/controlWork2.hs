@@ -17,10 +17,10 @@ infixl 9 .*.
 x .*. y = [(fst a, snd b) | a <- y, b <- x, snd a == fst b]
 
 --Шестое задание
-image x y = [snd a | b <-y, a <- x, fst a == b]
+image x y = normalize [snd a | b <-y, a <- x, fst a == b]
 
 --Седьмое задание
-preimage x y = [fst a | b <- y, a <- x, snd a == b]
+preimage x y = normalize [fst a | b <- y, a <- x, snd a == b]
 
 --Восьмое задание
 normalize [] = []
