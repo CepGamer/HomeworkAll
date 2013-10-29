@@ -11,9 +11,7 @@ myfind x@(BT l a r) t
     | t < a     = myfind l t
     | otherwise = myfind r t
 
-elements None = []
-elements (BT None a None) = [a]
-elements b@(BT l a r) = els b [] where
+elements b = els b [] where
 	els (BT lx x rx) y = els lx $ x:els rx y
 	els _ y = y
 
