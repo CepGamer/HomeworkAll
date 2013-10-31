@@ -44,3 +44,4 @@ type Heli(name, start, charge) =
     inherit Jet(name, start, charge)
         override x.move direction = "Move in 8 direction on any surface"
         override x.recharge time = "At any time in any place!"
+
