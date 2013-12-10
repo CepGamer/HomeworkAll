@@ -5,6 +5,9 @@ if not %my_builder_start%==1 goto :EOF
 set repo_name=Geometry271
 set proj_name=MainApp
 
+set msbuildpath="C:\Program Files (x86)\MSBuild\12.0\Bin"
+set blatpath="C:\Users\Сергей\Downloads\blat311\full"
+
 set fail=0
 set git_fail=0
 set build_fail=0

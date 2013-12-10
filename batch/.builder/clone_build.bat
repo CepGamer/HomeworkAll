@@ -4,7 +4,6 @@ if not %my_builder_start%==1 goto :EOF
 
 git clone https://github.com/CepGamer/%repo_name%.git>nul 2>%err_file%
 if errorlevel 1 goto :fail_git
-
 MSBuild.exe %repo_name%/%proj_name%.sln>%err_file%
 if not %ERRORLEVEL%==0  goto :fail_build
 
