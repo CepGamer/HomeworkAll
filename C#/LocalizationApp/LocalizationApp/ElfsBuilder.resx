@@ -1,0 +1,845 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="BuildCombobox.Items" xml:space="preserve">
+    <value>Slim</value>
+  </data>
+  <data name="PantsCombobox.Items6" xml:space="preserve">
+    <value>Trousers</value>
+  </data>
+  <data name="PantsLabel.Text" xml:space="preserve">
+    <value>Pants:</value>
+  </data>
+  <data name="&gt;&gt;BuildLegsCombobox.Parent" xml:space="preserve">
+    <value>LegsBox</value>
+  </data>
+  <data name="&gt;&gt;PantsLabel.ZOrder" xml:space="preserve">
+    <value>3</value>
+  </data>
+  <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="AgeUpDown.TabIndex" type="System.Int32, mscorlib">
+    <value>10</value>
+  </data>
+  <data name="GenderCombobox.Items1" xml:space="preserve">
+    <value>Female</value>
+  </data>
+  <data name="SkinLabel.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="&gt;&gt;CanChecklistbox.Type" xml:space="preserve">
+    <value>System.Windows.Forms.CheckedListBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  <data name="SkinCombobox.Size" type="System.Drawing.Size, System.Drawing">
+    <value>100, 21</value>
+  </data>
+  <data name="SkinLabel.Text" xml:space="preserve">
+    <value>Skin:</value>
+  </data>
+  <data name="&gt;&gt;SkinCombobox.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="HeightUpdown.Location" type="System.Drawing.Point, System.Drawing">
+    <value>246, 37</value>
+  </data>
+  <data name="&gt;&gt;NameTextBox.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="checkedListBox1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>120, 45</value>
+  </data>
+  <data name="NameLabel.Location" type="System.Drawing.Point, System.Drawing">
+    <value>7, 25</value>
+  </data>
+  <data name="SurnameLabel.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="&gt;&gt;SkinCombobox.Parent" xml:space="preserve">
+    <value>BodyBox</value>
+  </data>
+  <data name="SurnameLabel.TabIndex" type="System.Int32, mscorlib">
+    <value>5</value>
+  </data>
+  <data name="&gt;&gt;BodyBox.Name" xml:space="preserve">
+    <value>BodyBox</value>
+  </data>
+  <data name="&gt;&gt;ButtonCancel.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="ButtonCancel.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="AgeLabel.Text" xml:space="preserve">
+    <value>Age:</value>
+  </data>
+  <data name="NameTextBox.Size" type="System.Drawing.Size, System.Drawing">
+    <value>90, 20</value>
+  </data>
+  <data name="&gt;&gt;NameLabel.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="BuildLegsCombobox.Items1" xml:space="preserve">
+    <value>Athletic</value>
+  </data>
+  <data name="ButtonCancel.Location" type="System.Drawing.Point, System.Drawing">
+    <value>259, 290</value>
+  </data>
+  <data name="&gt;&gt;AgeLabel.Name" xml:space="preserve">
+    <value>AgeLabel</value>
+  </data>
+  <data name="&gt;&gt;LegsBox.Name" xml:space="preserve">
+    <value>LegsBox</value>
+  </data>
+  <data name="&gt;&gt;BuildLabel.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;CanChecklistbox.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="$this.Text" xml:space="preserve">
+    <value>Elf's Builder</value>
+  </data>
+  <data name="SurnameTextbox.Size" type="System.Drawing.Size, System.Drawing">
+    <value>100, 20</value>
+  </data>
+  <data name="NameLabel.Size" type="System.Drawing.Size, System.Drawing">
+    <value>38, 13</value>
+  </data>
+  <data name="SkinCombobox.TabIndex" type="System.Int32, mscorlib">
+    <value>3</value>
+  </data>
+  <data name="HeightUpdown.TabIndex" type="System.Int32, mscorlib">
+    <value>5</value>
+  </data>
+  <data name="&gt;&gt;SurnameLabel.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;SkinLabel.ZOrder" xml:space="preserve">
+    <value>3</value>
+  </data>
+  <data name="LegsBox.TabIndex" type="System.Int32, mscorlib">
+    <value>13</value>
+  </data>
+  <data name="&gt;&gt;CanChecklistbox.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="BuildLegsCombobox.Size" type="System.Drawing.Size, System.Drawing">
+    <value>100, 21</value>
+  </data>
+  <data name="&gt;&gt;NameTextBox.Parent" xml:space="preserve">
+    <value>GeneralBox</value>
+  </data>
+  <data name="GeneralBox.Size" type="System.Drawing.Size, System.Drawing">
+    <value>402, 67</value>
+  </data>
+  <data name="$this.AutoScaleDimensions" type="System.Drawing.SizeF, System.Drawing">
+    <value>6, 13</value>
+  </data>
+  <data name="&gt;&gt;GenderLabel.Name" xml:space="preserve">
+    <value>GenderLabel</value>
+  </data>
+  <data name="NameLabel.TabIndex" type="System.Int32, mscorlib">
+    <value>3</value>
+  </data>
+  <data name="SurnameLabel.Location" type="System.Drawing.Point, System.Drawing">
+    <value>116, 24</value>
+  </data>
+  <data name="&gt;&gt;AgeLabel.Parent" xml:space="preserve">
+    <value>GeneralBox</value>
+  </data>
+  <data name="&gt;&gt;PantsCombobox.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="&gt;&gt;BuildLegsCombobox.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;BuildCombobox.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;PantsLabel.Name" xml:space="preserve">
+    <value>PantsLabel</value>
+  </data>
+  <data name="BuildLabel.Size" type="System.Drawing.Size, System.Drawing">
+    <value>33, 13</value>
+  </data>
+  <data name="&gt;&gt;AgeLabel.ZOrder" xml:space="preserve">
+    <value>4</value>
+  </data>
+  <data name="&gt;&gt;SkinCombobox.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;BuildCombobox.Name" xml:space="preserve">
+    <value>BuildCombobox</value>
+  </data>
+  <data name="&gt;&gt;ButtonCancel.Name" xml:space="preserve">
+    <value>ButtonCancel</value>
+  </data>
+  <data name="BuildLegsLabel.Location" type="System.Drawing.Point, System.Drawing">
+    <value>146, 19</value>
+  </data>
+  <data name="ButtonCancel.Size" type="System.Drawing.Size, System.Drawing">
+    <value>75, 23</value>
+  </data>
+  <data name="&gt;&gt;SurnameLabel.ZOrder" xml:space="preserve">
+    <value>3</value>
+  </data>
+  <data name="PantsCombobox.Items3" xml:space="preserve">
+    <value>Khakis</value>
+  </data>
+  <data name="LegsBox.Text" xml:space="preserve">
+    <value>Legs</value>
+  </data>
+  <data name="LegsBox.Size" type="System.Drawing.Size, System.Drawing">
+    <value>402, 72</value>
+  </data>
+  <data name="SurnameTextbox.TabIndex" type="System.Int32, mscorlib">
+    <value>6</value>
+  </data>
+  <data name="SkinLabel.TabIndex" type="System.Int32, mscorlib">
+    <value>2</value>
+  </data>
+  <data name="PantsCombobox.Text" xml:space="preserve">
+    <value>Select pants</value>
+  </data>
+  <data name="PantsCombobox.Location" type="System.Drawing.Point, System.Drawing">
+    <value>6, 36</value>
+  </data>
+  <data name="CanChecklistbox.Items2" xml:space="preserve">
+    <value>Can fly</value>
+  </data>
+  <data name="&gt;&gt;GeneralBox.Type" xml:space="preserve">
+    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;BuildLegsLabel.Parent" xml:space="preserve">
+    <value>LegsBox</value>
+  </data>
+  <data name="&gt;&gt;NameTextBox.Name" xml:space="preserve">
+    <value>NameTextBox</value>
+  </data>
+  <data name="&gt;&gt;BodyBox.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;GeneralBox.Name" xml:space="preserve">
+    <value>GeneralBox</value>
+  </data>
+  <data name="GenderCombobox.Location" type="System.Drawing.Point, System.Drawing">
+    <value>240, 40</value>
+  </data>
+  <data name="SkinCombobox.Items3" xml:space="preserve">
+    <value>White</value>
+  </data>
+  <data name="PantsCombobox.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="&gt;&gt;AgeUpDown.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="PantsCombobox.Items5" xml:space="preserve">
+    <value>Shorts</value>
+  </data>
+  <data name="CanChecklistbox.Items1" xml:space="preserve">
+    <value>Can jump</value>
+  </data>
+  <data name="AgeLabel.Size" type="System.Drawing.Size, System.Drawing">
+    <value>29, 13</value>
+  </data>
+  <data name="&gt;&gt;HeightLabel.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="&gt;&gt;AgeUpDown.Type" xml:space="preserve">
+    <value>System.Windows.Forms.NumericUpDown, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="GenderLabel.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="GenderLabel.Location" type="System.Drawing.Point, System.Drawing">
+    <value>237, 24</value>
+  </data>
+  <data name="&gt;&gt;$this.Name" xml:space="preserve">
+    <value>ElfsBuilderForm</value>
+  </data>
+  <data name="PantsCombobox.Items1" xml:space="preserve">
+    <value>Chinos</value>
+  </data>
+  <data name="&gt;&gt;BodyBox.Type" xml:space="preserve">
+    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="AgeLabel.TabIndex" type="System.Int32, mscorlib">
+    <value>9</value>
+  </data>
+  <data name="PantsCombobox.Items" xml:space="preserve">
+    <value>Cargo</value>
+  </data>
+  <data name="&gt;&gt;GenderCombobox.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="HeightLabel.Size" type="System.Drawing.Size, System.Drawing">
+    <value>75, 13</value>
+  </data>
+  <data name="PantsLabel.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="SkinLabel.Location" type="System.Drawing.Point, System.Drawing">
+    <value>122, 20</value>
+  </data>
+  <data name="PantsLabel.Location" type="System.Drawing.Point, System.Drawing">
+    <value>7, 20</value>
+  </data>
+  <data name="&gt;&gt;BuildLegsLabel.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="GenderLabel.Size" type="System.Drawing.Size, System.Drawing">
+    <value>45, 13</value>
+  </data>
+  <data name="ChangeLanguageButton.TabIndex" type="System.Int32, mscorlib">
+    <value>2</value>
+  </data>
+  <data name="ChangeLanguageButton.Location" type="System.Drawing.Point, System.Drawing">
+    <value>13, 290</value>
+  </data>
+  <data name="&gt;&gt;BuildLabel.Parent" xml:space="preserve">
+    <value>BodyBox</value>
+  </data>
+  <data name="&gt;&gt;checkedListBox1.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;HeightUpdown.Type" xml:space="preserve">
+    <value>System.Windows.Forms.NumericUpDown, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;NameLabel.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="GenderLabel.Text" xml:space="preserve">
+    <value>Gender:</value>
+  </data>
+  <data name="BuildLegsLabel.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="&gt;&gt;SurnameTextbox.Name" xml:space="preserve">
+    <value>SurnameTextbox</value>
+  </data>
+  <data name="HeightLabel.Location" type="System.Drawing.Point, System.Drawing">
+    <value>243, 21</value>
+  </data>
+  <data name="ButtonOK.Location" type="System.Drawing.Point, System.Drawing">
+    <value>340, 290</value>
+  </data>
+  <data name="&gt;&gt;GenderCombobox.Parent" xml:space="preserve">
+    <value>GeneralBox</value>
+  </data>
+  <data name="&gt;&gt;PantsCombobox.Parent" xml:space="preserve">
+    <value>LegsBox</value>
+  </data>
+  <data name="&gt;&gt;ButtonCancel.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;BuildLabel.ZOrder" xml:space="preserve">
+    <value>5</value>
+  </data>
+  <data name="&gt;&gt;LegsBox.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="BuildLabel.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="BuildLegsLabel.TabIndex" type="System.Int32, mscorlib">
+    <value>2</value>
+  </data>
+  <data name="&gt;&gt;HeightUpdown.Name" xml:space="preserve">
+    <value>HeightUpdown</value>
+  </data>
+  <data name="&gt;&gt;checkedListBox1.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="BodyBox.Text" xml:space="preserve">
+    <value>Body</value>
+  </data>
+  <data name="PantsLabel.Size" type="System.Drawing.Size, System.Drawing">
+    <value>37, 13</value>
+  </data>
+  <data name="CanChecklistbox.Items" xml:space="preserve">
+    <value>Can swim</value>
+  </data>
+  <data name="BuildLegsCombobox.Items" xml:space="preserve">
+    <value>Slim</value>
+  </data>
+  <data name="&gt;&gt;SurnameLabel.Parent" xml:space="preserve">
+    <value>GeneralBox</value>
+  </data>
+  <data name="&gt;&gt;ButtonOK.Name" xml:space="preserve">
+    <value>ButtonOK</value>
+  </data>
+  <data name="GeneralBox.Text" xml:space="preserve">
+    <value>General Information</value>
+  </data>
+  <data name="BuildCombobox.Size" type="System.Drawing.Size, System.Drawing">
+    <value>99, 21</value>
+  </data>
+  <data name="&gt;&gt;ButtonOK.ZOrder" xml:space="preserve">
+    <value>6</value>
+  </data>
+  <data name="&gt;&gt;SkinLabel.Parent" xml:space="preserve">
+    <value>BodyBox</value>
+  </data>
+  <data name="AgeLabel.Location" type="System.Drawing.Point, System.Drawing">
+    <value>327, 27</value>
+  </data>
+  <data name="&gt;&gt;PantsCombobox.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="PantsCombobox.Items7" xml:space="preserve">
+    <value>Underpants</value>
+  </data>
+  <data name="&gt;&gt;SurnameTextbox.Parent" xml:space="preserve">
+    <value>GeneralBox</value>
+  </data>
+  <data name="PantsCombobox.Size" type="System.Drawing.Size, System.Drawing">
+    <value>120, 21</value>
+  </data>
+  <data name="&gt;&gt;HeightLabel.Parent" xml:space="preserve">
+    <value>BodyBox</value>
+  </data>
+  <data name="&gt;&gt;SurnameTextbox.ZOrder" xml:space="preserve">
+    <value>5</value>
+  </data>
+  <data name="CanChecklistbox.TabIndex" type="System.Int32, mscorlib">
+    <value>14</value>
+  </data>
+  <data name="HeightLabel.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="ButtonCancel.Text" xml:space="preserve">
+    <value>Cancel</value>
+  </data>
+  <data name="&gt;&gt;SkinCombobox.Name" xml:space="preserve">
+    <value>SkinCombobox</value>
+  </data>
+  <data name="HeightLabel.TabIndex" type="System.Int32, mscorlib">
+    <value>4</value>
+  </data>
+  <data name="BuildCombobox.Items1" xml:space="preserve">
+    <value>Athletic</value>
+  </data>
+  <data name="GenderCombobox.Items" xml:space="preserve">
+    <value>Male</value>
+  </data>
+  <data name="AgeUpDown.Size" type="System.Drawing.Size, System.Drawing">
+    <value>59, 20</value>
+  </data>
+  <data name="&gt;&gt;BuildLabel.Name" xml:space="preserve">
+    <value>BuildLabel</value>
+  </data>
+  <data name="PantsLabel.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;BodyBox.ZOrder" xml:space="preserve">
+    <value>3</value>
+  </data>
+  <data name="GeneralBox.Location" type="System.Drawing.Point, System.Drawing">
+    <value>13, 13</value>
+  </data>
+  <data name="ButtonOK.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="BodyBox.TabIndex" type="System.Int32, mscorlib">
+    <value>11</value>
+  </data>
+  <data name="checkedListBox1.Items2" xml:space="preserve">
+    <value>Can fly</value>
+  </data>
+  <data name="BuildCombobox.Location" type="System.Drawing.Point, System.Drawing">
+    <value>6, 37</value>
+  </data>
+  <data name="CanChecklistbox.Location" type="System.Drawing.Point, System.Drawing">
+    <value>19, 239</value>
+  </data>
+  <data name="SurnameLabel.Text" xml:space="preserve">
+    <value>Surname:</value>
+  </data>
+  <data name="ChangeLanguageButton.Text" xml:space="preserve">
+    <value>Change Language</value>
+  </data>
+  <data name="BuildCombobox.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="&gt;&gt;GenderCombobox.Name" xml:space="preserve">
+    <value>GenderCombobox</value>
+  </data>
+  <data name="checkedListBox1.TabIndex" type="System.Int32, mscorlib">
+    <value>14</value>
+  </data>
+  <data name="SurnameTextbox.Location" type="System.Drawing.Point, System.Drawing">
+    <value>119, 40</value>
+  </data>
+  <data name="LegsBox.Location" type="System.Drawing.Point, System.Drawing">
+    <value>13, 160</value>
+  </data>
+  <data name="SurnameTextbox.Text" xml:space="preserve">
+    <value>Enter surname here</value>
+  </data>
+  <data name="&gt;&gt;CanChecklistbox.Name" xml:space="preserve">
+    <value>CanChecklistbox</value>
+  </data>
+  <data name="&gt;&gt;ButtonOK.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;GeneralBox.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="&gt;&gt;$this.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Form, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="BuildLegsCombobox.Location" type="System.Drawing.Point, System.Drawing">
+    <value>146, 36</value>
+  </data>
+  <data name="PantsCombobox.Items2" xml:space="preserve">
+    <value>Jeans</value>
+  </data>
+  <data name="BuildLegsLabel.Text" xml:space="preserve">
+    <value>Build:</value>
+  </data>
+  <data name="SkinLabel.Size" type="System.Drawing.Size, System.Drawing">
+    <value>31, 13</value>
+  </data>
+  <data name="&gt;&gt;GenderLabel.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="SurnameLabel.Size" type="System.Drawing.Size, System.Drawing">
+    <value>52, 13</value>
+  </data>
+  <data name="&gt;&gt;checkedListBox1.Name" xml:space="preserve">
+    <value>checkedListBox1</value>
+  </data>
+  <data name="&gt;&gt;GenderLabel.Parent" xml:space="preserve">
+    <value>GeneralBox</value>
+  </data>
+  <data name="&gt;&gt;NameTextBox.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;LegsBox.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="BuildLabel.Text" xml:space="preserve">
+    <value>Build:</value>
+  </data>
+  <data name="checkedListBox1.Location" type="System.Drawing.Point, System.Drawing">
+    <value>19, 239</value>
+  </data>
+  <data name="&gt;&gt;AgeLabel.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;GeneralBox.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="AgeLabel.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="&gt;&gt;AgeUpDown.Name" xml:space="preserve">
+    <value>AgeUpDown</value>
+  </data>
+  <data name="GenderCombobox.TabIndex" type="System.Int32, mscorlib">
+    <value>8</value>
+  </data>
+  <data name="GenderLabel.TabIndex" type="System.Int32, mscorlib">
+    <value>7</value>
+  </data>
+  <data name="&gt;&gt;SkinLabel.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;HeightLabel.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="PantsCombobox.Items4" xml:space="preserve">
+    <value>Leggings</value>
+  </data>
+  <data name="&gt;&gt;ChangeLanguageButton.ZOrder" xml:space="preserve">
+    <value>4</value>
+  </data>
+  <data name="&gt;&gt;PantsLabel.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="checkedListBox1.Items1" xml:space="preserve">
+    <value>Can jump</value>
+  </data>
+  <data name="&gt;&gt;NameLabel.Name" xml:space="preserve">
+    <value>NameLabel</value>
+  </data>
+  <data name="BuildLegsLabel.Size" type="System.Drawing.Size, System.Drawing">
+    <value>33, 13</value>
+  </data>
+  <data name="SkinCombobox.Items1" xml:space="preserve">
+    <value>Black</value>
+  </data>
+  <data name="&gt;&gt;GenderCombobox.ZOrder" xml:space="preserve">
+    <value>6</value>
+  </data>
+  <data name="&gt;&gt;checkedListBox1.Type" xml:space="preserve">
+    <value>System.Windows.Forms.CheckedListBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="BuildLabel.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="checkedListBox1.Items" xml:space="preserve">
+    <value>Can swim</value>
+  </data>
+  <data name="HeightUpdown.Size" type="System.Drawing.Size, System.Drawing">
+    <value>62, 20</value>
+  </data>
+  <data name="&gt;&gt;SkinLabel.Name" xml:space="preserve">
+    <value>SkinLabel</value>
+  </data>
+  <data name="&gt;&gt;PantsLabel.Parent" xml:space="preserve">
+    <value>LegsBox</value>
+  </data>
+  <data name="&gt;&gt;LegsBox.Type" xml:space="preserve">
+    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="BodyBox.Location" type="System.Drawing.Point, System.Drawing">
+    <value>13, 86</value>
+  </data>
+  <data name="SkinCombobox.Items2" xml:space="preserve">
+    <value>Red</value>
+  </data>
+  <data name="NameTextBox.Text" xml:space="preserve">
+    <value>Enter name here</value>
+  </data>
+  <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
+    <value>427, 321</value>
+  </data>
+  <data name="&gt;&gt;BuildLegsLabel.Name" xml:space="preserve">
+    <value>BuildLegsLabel</value>
+  </data>
+  <data name="HeightLabel.Text" xml:space="preserve">
+    <value>Height (in cm):</value>
+  </data>
+  <data name="&gt;&gt;ChangeLanguageButton.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;SurnameTextbox.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;BuildCombobox.ZOrder" xml:space="preserve">
+    <value>4</value>
+  </data>
+  <data name="&gt;&gt;BuildLegsLabel.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="ChangeLanguageButton.Size" type="System.Drawing.Size, System.Drawing">
+    <value>105, 23</value>
+  </data>
+  <data name="&gt;&gt;NameLabel.Parent" xml:space="preserve">
+    <value>GeneralBox</value>
+  </data>
+  <data name="&gt;&gt;HeightUpdown.Parent" xml:space="preserve">
+    <value>BodyBox</value>
+  </data>
+  <data name="&gt;&gt;ButtonOK.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="BuildCombobox.Items2" xml:space="preserve">
+    <value>Fat</value>
+  </data>
+  <data name="&gt;&gt;PantsCombobox.Name" xml:space="preserve">
+    <value>PantsCombobox</value>
+  </data>
+  <data name="SkinCombobox.Items" xml:space="preserve">
+    <value>Australian</value>
+  </data>
+  <data name="GeneralBox.TabIndex" type="System.Int32, mscorlib">
+    <value>12</value>
+  </data>
+  <data name="BuildLegsCombobox.TabIndex" type="System.Int32, mscorlib">
+    <value>3</value>
+  </data>
+  <data name="BodyBox.Size" type="System.Drawing.Size, System.Drawing">
+    <value>402, 67</value>
+  </data>
+  <data name="&gt;&gt;BuildLegsCombobox.Name" xml:space="preserve">
+    <value>BuildLegsCombobox</value>
+  </data>
+  <data name="SkinCombobox.Location" type="System.Drawing.Point, System.Drawing">
+    <value>125, 37</value>
+  </data>
+  <data name="NameLabel.Text" xml:space="preserve">
+    <value>Name:</value>
+  </data>
+  <data name="&gt;&gt;GenderLabel.ZOrder" xml:space="preserve">
+    <value>7</value>
+  </data>
+  <data name="&gt;&gt;ChangeLanguageButton.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;BuildCombobox.Parent" xml:space="preserve">
+    <value>BodyBox</value>
+  </data>
+  <data name="&gt;&gt;BuildLegsCombobox.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;ChangeLanguageButton.Name" xml:space="preserve">
+    <value>ChangeLanguageButton</value>
+  </data>
+  <data name="&gt;&gt;HeightUpdown.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="ButtonOK.Text" xml:space="preserve">
+    <value>OK</value>
+  </data>
+  <data name="AgeUpDown.Location" type="System.Drawing.Point, System.Drawing">
+    <value>330, 42</value>
+  </data>
+  <data name="BuildLegsCombobox.Items2" xml:space="preserve">
+    <value>Fat</value>
+  </data>
+  <data name="&gt;&gt;AgeUpDown.Parent" xml:space="preserve">
+    <value>GeneralBox</value>
+  </data>
+  <data name="NameTextBox.Location" type="System.Drawing.Point, System.Drawing">
+    <value>6, 41</value>
+  </data>
+  <data name="&gt;&gt;SurnameLabel.Name" xml:space="preserve">
+    <value>SurnameLabel</value>
+  </data>
+  <data name="GenderCombobox.Size" type="System.Drawing.Size, System.Drawing">
+    <value>80, 21</value>
+  </data>
+  <data name="NameLabel.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="BuildLabel.Location" type="System.Drawing.Point, System.Drawing">
+    <value>7, 20</value>
+  </data>
+  <data name="&gt;&gt;ButtonCancel.ZOrder" xml:space="preserve">
+    <value>5</value>
+  </data>
+  <data name="NameTextBox.TabIndex" type="System.Int32, mscorlib">
+    <value>4</value>
+  </data>
+  <data name="&gt;&gt;HeightLabel.Name" xml:space="preserve">
+    <value>HeightLabel</value>
+  </data>
+  <data name="ButtonOK.Size" type="System.Drawing.Size, System.Drawing">
+    <value>75, 23</value>
+  </data>
+  <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <metadata name="$this.Language" type="System.Globalization.CultureInfo, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>en</value>
+  </metadata>
+</root>
