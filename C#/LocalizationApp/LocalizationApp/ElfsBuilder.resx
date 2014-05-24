@@ -126,13 +126,19 @@
   <data name="PantsLabel.Text" xml:space="preserve">
     <value>Pants:</value>
   </data>
-  <data name="&gt;&gt;BuildLegsCombobox.Parent" xml:space="preserve">
-    <value>LegsBox</value>
+  <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="NameTextBox.TabIndex" type="System.Int32, mscorlib">
+    <value>4</value>
+  </data>
+  <data name="SurnameLabel.Text" xml:space="preserve">
+    <value>Surname:</value>
   </data>
   <data name="&gt;&gt;PantsLabel.ZOrder" xml:space="preserve">
     <value>3</value>
   </data>
-  <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="PantsLabel.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
   <data name="AgeUpDown.TabIndex" type="System.Int32, mscorlib">
     <value>10</value>
   </data>
@@ -141,9 +147,6 @@
   </data>
   <data name="SkinLabel.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
-  </data>
-  <data name="&gt;&gt;CanChecklistbox.Type" xml:space="preserve">
-    <value>System.Windows.Forms.CheckedListBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="SkinCombobox.Size" type="System.Drawing.Size, System.Drawing">
@@ -158,23 +161,17 @@
   <data name="HeightUpdown.Location" type="System.Drawing.Point, System.Drawing">
     <value>246, 37</value>
   </data>
-  <data name="&gt;&gt;NameTextBox.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
   <data name="checkedListBox1.Size" type="System.Drawing.Size, System.Drawing">
     <value>120, 45</value>
+  </data>
+  <data name="&gt;&gt;AgeLabel.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="NameLabel.Location" type="System.Drawing.Point, System.Drawing">
     <value>7, 25</value>
   </data>
-  <data name="SurnameLabel.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
   <data name="&gt;&gt;SkinCombobox.Parent" xml:space="preserve">
     <value>BodyBox</value>
-  </data>
-  <data name="SurnameLabel.TabIndex" type="System.Int32, mscorlib">
-    <value>5</value>
   </data>
   <data name="&gt;&gt;BodyBox.Name" xml:space="preserve">
     <value>BodyBox</value>
@@ -184,6 +181,9 @@
   </data>
   <data name="ButtonCancel.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
+  </data>
+  <data name="&gt;&gt;GenderLabel.Parent" xml:space="preserve">
+    <value>GeneralBox</value>
   </data>
   <data name="AgeLabel.Text" xml:space="preserve">
     <value>Age:</value>
@@ -226,6 +226,9 @@
   </data>
   <data name="HeightUpdown.TabIndex" type="System.Int32, mscorlib">
     <value>5</value>
+  </data>
+  <data name="&gt;&gt;SurnameLabel.Name" xml:space="preserve">
+    <value>SurnameLabel</value>
   </data>
   <data name="&gt;&gt;SurnameLabel.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
@@ -296,8 +299,8 @@
   <data name="ButtonCancel.Size" type="System.Drawing.Size, System.Drawing">
     <value>75, 23</value>
   </data>
-  <data name="&gt;&gt;SurnameLabel.ZOrder" xml:space="preserve">
-    <value>3</value>
+  <data name="SurnameTextbox.Text" xml:space="preserve">
+    <value>Enter surname here</value>
   </data>
   <data name="PantsCombobox.Items3" xml:space="preserve">
     <value>Khakis</value>
@@ -317,9 +320,6 @@
   <data name="PantsCombobox.Text" xml:space="preserve">
     <value>Select pants</value>
   </data>
-  <data name="PantsCombobox.Location" type="System.Drawing.Point, System.Drawing">
-    <value>6, 36</value>
-  </data>
   <data name="CanChecklistbox.Items2" xml:space="preserve">
     <value>Can fly</value>
   </data>
@@ -332,17 +332,26 @@
   <data name="&gt;&gt;NameTextBox.Name" xml:space="preserve">
     <value>NameTextBox</value>
   </data>
-  <data name="&gt;&gt;BodyBox.Parent" xml:space="preserve">
-    <value>$this</value>
+  <data name="&gt;&gt;HeightLabel.Name" xml:space="preserve">
+    <value>HeightLabel</value>
+  </data>
+  <data name="&gt;&gt;HeightUpdown.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;SurnameLabel.ZOrder" xml:space="preserve">
+    <value>3</value>
   </data>
   <data name="&gt;&gt;GeneralBox.Name" xml:space="preserve">
     <value>GeneralBox</value>
   </data>
-  <data name="GenderCombobox.Location" type="System.Drawing.Point, System.Drawing">
-    <value>240, 40</value>
+  <data name="&gt;&gt;PantsCombobox.Name" xml:space="preserve">
+    <value>PantsCombobox</value>
   </data>
   <data name="SkinCombobox.Items3" xml:space="preserve">
     <value>White</value>
+  </data>
+  <data name="ButtonOK.Text" xml:space="preserve">
+    <value>OK</value>
   </data>
   <data name="PantsCombobox.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
@@ -362,9 +371,6 @@
   <data name="&gt;&gt;HeightLabel.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
-  <data name="&gt;&gt;AgeUpDown.Type" xml:space="preserve">
-    <value>System.Windows.Forms.NumericUpDown, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
   <data name="GenderLabel.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
@@ -374,8 +380,14 @@
   <data name="&gt;&gt;$this.Name" xml:space="preserve">
     <value>ElfsBuilderForm</value>
   </data>
+  <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
+    <value>427, 321</value>
+  </data>
   <data name="PantsCombobox.Items1" xml:space="preserve">
     <value>Chinos</value>
+  </data>
+  <data name="SurnameLabel.Size" type="System.Drawing.Size, System.Drawing">
+    <value>52, 13</value>
   </data>
   <data name="&gt;&gt;BodyBox.Type" xml:space="preserve">
     <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
@@ -383,11 +395,8 @@
   <data name="AgeLabel.TabIndex" type="System.Int32, mscorlib">
     <value>9</value>
   </data>
-  <data name="PantsCombobox.Items" xml:space="preserve">
-    <value>Cargo</value>
-  </data>
-  <data name="&gt;&gt;GenderCombobox.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="&gt;&gt;BodyBox.Parent" xml:space="preserve">
+    <value>$this</value>
   </data>
   <data name="HeightLabel.Size" type="System.Drawing.Size, System.Drawing">
     <value>75, 13</value>
@@ -395,8 +404,17 @@
   <data name="PantsLabel.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
+  <data name="SkinCombobox.Items1" xml:space="preserve">
+    <value>Black</value>
+  </data>
+  <data name="BuildLabel.Location" type="System.Drawing.Point, System.Drawing">
+    <value>7, 20</value>
+  </data>
   <data name="SkinLabel.Location" type="System.Drawing.Point, System.Drawing">
     <value>122, 20</value>
+  </data>
+  <data name="NameLabel.Text" xml:space="preserve">
+    <value>Name:</value>
   </data>
   <data name="PantsLabel.Location" type="System.Drawing.Point, System.Drawing">
     <value>7, 20</value>
@@ -437,6 +455,9 @@
   <data name="HeightLabel.Location" type="System.Drawing.Point, System.Drawing">
     <value>243, 21</value>
   </data>
+  <data name="BuildLegsCombobox.Items2" xml:space="preserve">
+    <value>Fat</value>
+  </data>
   <data name="ButtonOK.Location" type="System.Drawing.Point, System.Drawing">
     <value>340, 290</value>
   </data>
@@ -470,26 +491,20 @@
   <data name="BodyBox.Text" xml:space="preserve">
     <value>Body</value>
   </data>
-  <data name="PantsLabel.Size" type="System.Drawing.Size, System.Drawing">
-    <value>37, 13</value>
-  </data>
   <data name="CanChecklistbox.Items" xml:space="preserve">
     <value>Can swim</value>
   </data>
+  <data name="&gt;&gt;BuildCombobox.ZOrder" xml:space="preserve">
+    <value>4</value>
+  </data>
   <data name="BuildLegsCombobox.Items" xml:space="preserve">
     <value>Slim</value>
-  </data>
-  <data name="&gt;&gt;SurnameLabel.Parent" xml:space="preserve">
-    <value>GeneralBox</value>
   </data>
   <data name="&gt;&gt;ButtonOK.Name" xml:space="preserve">
     <value>ButtonOK</value>
   </data>
   <data name="GeneralBox.Text" xml:space="preserve">
     <value>General Information</value>
-  </data>
-  <data name="BuildCombobox.Size" type="System.Drawing.Size, System.Drawing">
-    <value>99, 21</value>
   </data>
   <data name="&gt;&gt;ButtonOK.ZOrder" xml:space="preserve">
     <value>6</value>
@@ -524,9 +539,6 @@
   <data name="HeightLabel.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
-  <data name="ButtonCancel.Text" xml:space="preserve">
-    <value>Cancel</value>
-  </data>
   <data name="&gt;&gt;SkinCombobox.Name" xml:space="preserve">
     <value>SkinCombobox</value>
   </data>
@@ -542,11 +554,8 @@
   <data name="AgeUpDown.Size" type="System.Drawing.Size, System.Drawing">
     <value>59, 20</value>
   </data>
-  <data name="&gt;&gt;BuildLabel.Name" xml:space="preserve">
-    <value>BuildLabel</value>
-  </data>
-  <data name="PantsLabel.TabIndex" type="System.Int32, mscorlib">
-    <value>0</value>
+  <data name="ButtonCancel.Text" xml:space="preserve">
+    <value>Cancel</value>
   </data>
   <data name="&gt;&gt;BodyBox.ZOrder" xml:space="preserve">
     <value>3</value>
@@ -554,11 +563,8 @@
   <data name="GeneralBox.Location" type="System.Drawing.Point, System.Drawing">
     <value>13, 13</value>
   </data>
-  <data name="ButtonOK.TabIndex" type="System.Int32, mscorlib">
+  <data name="BuildLabel.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
-  </data>
-  <data name="BodyBox.TabIndex" type="System.Int32, mscorlib">
-    <value>11</value>
   </data>
   <data name="checkedListBox1.Items2" xml:space="preserve">
     <value>Can fly</value>
@@ -566,11 +572,8 @@
   <data name="BuildCombobox.Location" type="System.Drawing.Point, System.Drawing">
     <value>6, 37</value>
   </data>
-  <data name="CanChecklistbox.Location" type="System.Drawing.Point, System.Drawing">
-    <value>19, 239</value>
-  </data>
-  <data name="SurnameLabel.Text" xml:space="preserve">
-    <value>Surname:</value>
+  <data name="&gt;&gt;GenderCombobox.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="ChangeLanguageButton.Text" xml:space="preserve">
     <value>Change Language</value>
@@ -578,20 +581,20 @@
   <data name="BuildCombobox.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
   </data>
-  <data name="&gt;&gt;GenderCombobox.Name" xml:space="preserve">
-    <value>GenderCombobox</value>
-  </data>
   <data name="checkedListBox1.TabIndex" type="System.Int32, mscorlib">
     <value>14</value>
   </data>
   <data name="SurnameTextbox.Location" type="System.Drawing.Point, System.Drawing">
     <value>119, 40</value>
   </data>
+  <data name="BuildLegsCombobox.Location" type="System.Drawing.Point, System.Drawing">
+    <value>146, 36</value>
+  </data>
   <data name="LegsBox.Location" type="System.Drawing.Point, System.Drawing">
     <value>13, 160</value>
   </data>
-  <data name="SurnameTextbox.Text" xml:space="preserve">
-    <value>Enter surname here</value>
+  <data name="ButtonOK.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
   </data>
   <data name="&gt;&gt;CanChecklistbox.Name" xml:space="preserve">
     <value>CanChecklistbox</value>
@@ -605,8 +608,8 @@
   <data name="&gt;&gt;$this.Type" xml:space="preserve">
     <value>System.Windows.Forms.Form, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="BuildLegsCombobox.Location" type="System.Drawing.Point, System.Drawing">
-    <value>146, 36</value>
+  <data name="SurnameLabel.TabIndex" type="System.Int32, mscorlib">
+    <value>5</value>
   </data>
   <data name="PantsCombobox.Items2" xml:space="preserve">
     <value>Jeans</value>
@@ -620,14 +623,14 @@
   <data name="&gt;&gt;GenderLabel.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="SurnameLabel.Size" type="System.Drawing.Size, System.Drawing">
-    <value>52, 13</value>
+  <data name="PantsCombobox.Items" xml:space="preserve">
+    <value>Cargo</value>
   </data>
   <data name="&gt;&gt;checkedListBox1.Name" xml:space="preserve">
     <value>checkedListBox1</value>
   </data>
-  <data name="&gt;&gt;GenderLabel.Parent" xml:space="preserve">
-    <value>GeneralBox</value>
+  <data name="&gt;&gt;GenderCombobox.Name" xml:space="preserve">
+    <value>GenderCombobox</value>
   </data>
   <data name="&gt;&gt;NameTextBox.ZOrder" xml:space="preserve">
     <value>0</value>
@@ -641,8 +644,8 @@
   <data name="checkedListBox1.Location" type="System.Drawing.Point, System.Drawing">
     <value>19, 239</value>
   </data>
-  <data name="&gt;&gt;AgeLabel.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="CanChecklistbox.Location" type="System.Drawing.Point, System.Drawing">
+    <value>19, 239</value>
   </data>
   <data name="&gt;&gt;GeneralBox.Parent" xml:space="preserve">
     <value>$this</value>
@@ -660,9 +663,6 @@
     <value>7</value>
   </data>
   <data name="&gt;&gt;SkinLabel.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;HeightLabel.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="PantsCombobox.Items4" xml:space="preserve">
@@ -683,8 +683,8 @@
   <data name="BuildLegsLabel.Size" type="System.Drawing.Size, System.Drawing">
     <value>33, 13</value>
   </data>
-  <data name="SkinCombobox.Items1" xml:space="preserve">
-    <value>Black</value>
+  <data name="&gt;&gt;CanChecklistbox.Type" xml:space="preserve">
+    <value>System.Windows.Forms.CheckedListBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;GenderCombobox.ZOrder" xml:space="preserve">
     <value>6</value>
@@ -692,8 +692,8 @@
   <data name="&gt;&gt;checkedListBox1.Type" xml:space="preserve">
     <value>System.Windows.Forms.CheckedListBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="BuildLabel.TabIndex" type="System.Int32, mscorlib">
-    <value>0</value>
+  <data name="PantsLabel.Size" type="System.Drawing.Size, System.Drawing">
+    <value>37, 13</value>
   </data>
   <data name="checkedListBox1.Items" xml:space="preserve">
     <value>Can swim</value>
@@ -719,8 +719,8 @@
   <data name="NameTextBox.Text" xml:space="preserve">
     <value>Enter name here</value>
   </data>
-  <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-    <value>427, 321</value>
+  <data name="&gt;&gt;NameTextBox.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;BuildLegsLabel.Name" xml:space="preserve">
     <value>BuildLegsLabel</value>
@@ -734,8 +734,8 @@
   <data name="&gt;&gt;SurnameTextbox.Type" xml:space="preserve">
     <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;BuildCombobox.ZOrder" xml:space="preserve">
-    <value>4</value>
+  <data name="&gt;&gt;SurnameLabel.Parent" xml:space="preserve">
+    <value>GeneralBox</value>
   </data>
   <data name="&gt;&gt;BuildLegsLabel.ZOrder" xml:space="preserve">
     <value>1</value>
@@ -755,8 +755,8 @@
   <data name="BuildCombobox.Items2" xml:space="preserve">
     <value>Fat</value>
   </data>
-  <data name="&gt;&gt;PantsCombobox.Name" xml:space="preserve">
-    <value>PantsCombobox</value>
+  <data name="&gt;&gt;BuildLegsCombobox.Parent" xml:space="preserve">
+    <value>LegsBox</value>
   </data>
   <data name="SkinCombobox.Items" xml:space="preserve">
     <value>Australian</value>
@@ -776,14 +776,14 @@
   <data name="SkinCombobox.Location" type="System.Drawing.Point, System.Drawing">
     <value>125, 37</value>
   </data>
-  <data name="NameLabel.Text" xml:space="preserve">
-    <value>Name:</value>
+  <data name="PantsCombobox.Location" type="System.Drawing.Point, System.Drawing">
+    <value>6, 36</value>
   </data>
   <data name="&gt;&gt;GenderLabel.ZOrder" xml:space="preserve">
     <value>7</value>
   </data>
-  <data name="&gt;&gt;ChangeLanguageButton.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="BodyBox.TabIndex" type="System.Int32, mscorlib">
+    <value>11</value>
   </data>
   <data name="&gt;&gt;BuildCombobox.Parent" xml:space="preserve">
     <value>BodyBox</value>
@@ -794,17 +794,17 @@
   <data name="&gt;&gt;ChangeLanguageButton.Name" xml:space="preserve">
     <value>ChangeLanguageButton</value>
   </data>
-  <data name="&gt;&gt;HeightUpdown.ZOrder" xml:space="preserve">
-    <value>0</value>
+  <data name="GenderCombobox.Location" type="System.Drawing.Point, System.Drawing">
+    <value>240, 40</value>
   </data>
-  <data name="ButtonOK.Text" xml:space="preserve">
-    <value>OK</value>
+  <data name="SurnameLabel.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
   </data>
   <data name="AgeUpDown.Location" type="System.Drawing.Point, System.Drawing">
     <value>330, 42</value>
   </data>
-  <data name="BuildLegsCombobox.Items2" xml:space="preserve">
-    <value>Fat</value>
+  <data name="&gt;&gt;BuildLabel.Name" xml:space="preserve">
+    <value>BuildLabel</value>
   </data>
   <data name="&gt;&gt;AgeUpDown.Parent" xml:space="preserve">
     <value>GeneralBox</value>
@@ -812,8 +812,8 @@
   <data name="NameTextBox.Location" type="System.Drawing.Point, System.Drawing">
     <value>6, 41</value>
   </data>
-  <data name="&gt;&gt;SurnameLabel.Name" xml:space="preserve">
-    <value>SurnameLabel</value>
+  <data name="&gt;&gt;ChangeLanguageButton.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="GenderCombobox.Size" type="System.Drawing.Size, System.Drawing">
     <value>80, 21</value>
@@ -821,17 +821,17 @@
   <data name="NameLabel.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
-  <data name="BuildLabel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>7, 20</value>
+  <data name="&gt;&gt;AgeUpDown.Type" xml:space="preserve">
+    <value>System.Windows.Forms.NumericUpDown, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;ButtonCancel.ZOrder" xml:space="preserve">
     <value>5</value>
   </data>
-  <data name="NameTextBox.TabIndex" type="System.Int32, mscorlib">
-    <value>4</value>
+  <data name="BuildCombobox.Size" type="System.Drawing.Size, System.Drawing">
+    <value>99, 21</value>
   </data>
-  <data name="&gt;&gt;HeightLabel.Name" xml:space="preserve">
-    <value>HeightLabel</value>
+  <data name="&gt;&gt;HeightLabel.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="ButtonOK.Size" type="System.Drawing.Size, System.Drawing">
     <value>75, 23</value>

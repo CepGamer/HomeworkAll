@@ -372,6 +372,7 @@
             this.Controls.Add(this.ChangeLanguageButton);
             this.Controls.Add(this.ButtonCancel);
             this.Controls.Add(this.ButtonOK);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Name = "ElfsBuilderForm";
             ((System.ComponentModel.ISupportInitialize)(this.AgeUpDown)).EndInit();
             this.BodyBox.ResumeLayout(false);
