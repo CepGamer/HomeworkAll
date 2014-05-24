@@ -1,0 +1,67 @@
+ldc 1
+st 1
+ldc 2
+st 2
+
+; Initialise variables
+; 1 is i
+; 2 is j
+
+begin:
+ld 1
+ldc 10001
+cmp
+ldc 1
+add
+br end
+
+ld 2
+ldc 1
+add
+st 2
+
+isprime:
+
+ldc 2
+st 5
+
+ld 5
+ld 5
+mul
+ld 2
+cmp
+ldc 1
+add
+br endip
+
+ld 2
+ld 5
+mod
+ld 5
+ldc 1
+add
+st 5
+br isprime
+jmp begin
+
+endip:
+ld 5
+ld 5
+mul
+ld 2
+cmp
+ldc 1
+sub
+br begin
+
+;i add
+
+ld 1
+ldc 1
+add
+st 1
+jmp begin
+
+end:
+ld 2
+hlt
