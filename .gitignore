@@ -2,3 +2,7 @@
 *\obj
 *.suo
 *.dll
+*.zip
+*/.idea/*
+*/test*.txt
+
