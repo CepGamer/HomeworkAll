@@ -2,3 +2,9 @@
 *\obj
 *.suo
 *.dll
+*/.idea/*
+*/test*.txt
+python/it.txt
+python/string.txt
+python/*.zip
+
