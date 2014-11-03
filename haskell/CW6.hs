@@ -55,11 +55,11 @@ val a s = [(a, s)]
 
 infixl 2 |||
 (|||) :: Parser a -> Parser a -> Parser a
-a (|||) b = \s -> a s ++ b s
+a ||| b = \s -> a s ++ b s
 
 infixl 3 ||>
 (||>) :: Parser a -> (a -> Parser b) -> Parser b
-p (||>) q = \s -> concat [q a s | (a, s) <- p s]
+p ||> q = \s -> concat [q a s | (a, s) <- p s]
 
 many :: Parser a -> Parser [a]
 many a = a ||> (\x -> many a ||> val . (x:)) ||| val []
