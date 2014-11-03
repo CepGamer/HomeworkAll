@@ -1,0 +1,49 @@
+ldc 2
+ldc 3
+st 1
+st 0
+cycle: ;; 5
+ld 0
+ldc 10001
+cmp
+ldc 1
+add ;; 10
+br end
+ldc 2
+st 2
+for:
+ld 2 ;; 15
+ld 2
+mul
+ld 1
+cmp
+ldc 1 ;; 20
+sub
+ldc 0
+cmp
+ldc 1
+add ;; 25
+br check
+ld 1
+ld 2
+mod 
+ld 2
+ldc 1
+add
+st 2
+br for
+jmp next
+check:
+ld 0
+ldc 1
+add
+st 0
+next:
+ld 1
+ldc 1
+add
+st 0
+jmp cycle
+end:
+ld 1
+hlt
