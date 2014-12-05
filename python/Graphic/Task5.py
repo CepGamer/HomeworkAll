@@ -4,22 +4,19 @@ import numpy as np
 
 img = imread("mandril.bmp", IMREAD_GRAYSCALE)
 
-def transformPoint(pt, center, coef = 2, alpha = pi / 4):
-    x = (pt[0] + center[0]) / coef - center[0]
-    y = (pt[1] + center[1]) / coef - center[1]
-    nx = +x * cos(alpha) + y * sin(alpha)
-    ny = -x * sin(alpha) + y * cos(alpha)
-    return (nx + center[0], ny + center[1])
+def transformPoint(pt, M):
+    rt = np.dot(M, (pt[0], pt[1], 1.0))
+    return rt.tolist()
 
 def dist(x, y):
     a = x[0] - y[0]
     b = x[1] - y[1]
     return sqrt(a * a + b * b)
 
-def percentMatching(midPoint, matches, kp, kpChanged):
+def percentMatching(matrix, matches, kp, kpChanged):
     g = 0
     for mc in matches:
-        if dist(transformPoint(kp[mc.queryIdx].pt, midPoint), kpChanged[mc.trainIdx].pt) < 5:
+        if dist(transformPoint(kp[mc.queryIdx].pt, matrix), kpChanged[mc.trainIdx].pt) < 1:
             g += 1
     return (g * 100) / len(matches)
 
@@ -27,7 +24,7 @@ if __name__ == "__main__":
     sift = SIFT()
     kp, des = sift.detectAndCompute(img, None)
     imgOrigKP = drawKeypoints(img, kp)
-    imshow("Special points", imgOrigKP)
+#    imshow("Special points", imgOrigKP)
 #    waitKey(0)
 
     rows, cols = img.shape
@@ -35,14 +32,22 @@ if __name__ == "__main__":
     rotatedImg = warpAffine(img, M, img.shape)
     kpRot, desRot = sift.detectAndCompute(rotatedImg, None)
     imRotatedKP = drawKeypoints(rotatedImg, kpRot)
-    imshow("Special points, Rotated", imRotatedKP)
+#    imshow("Special points, Rotated", imRotatedKP)
 #    waitKey(0)
 
+    FLANN_INDEX_KDTREE = 0
+    index_params = dict(algorithm = FLANN_INDEX_KDTREE, trees = 5)
+    search_params = dict(checks=50)   # or pass empty dictionary
+    flann = FlannBasedMatcher(index_params,search_params)
+
     bf = BFMatcher(NORM_L2, crossCheck = True)
-    matches = bf.match(des, desRot)
+
+#    matches = bf.match(des, desRot)
+    matches = flann.match(des, desRot)
 
     matches = sorted(matches, key = lambda x: x.distance)
-    result = percentMatching((cols / 2, rows / 2), matches, kp, kpRot)
+    result = percentMatching(M, matches, kp, kpRot)
+    print result
     file = open("out.txt", 'w')
     file.write(str(result))
     file.close()
