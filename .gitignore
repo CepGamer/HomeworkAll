@@ -7,3 +7,7 @@
 python/it.txt
 python/string.txt
 python/*.zip
+*.out
+*.exe
+C/Graphs/*.in
+C/Graphs/*.out
