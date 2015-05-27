@@ -27,8 +27,8 @@ int n, m, k, w, h, a;
 long long azaz = 0;
 FILE *in, *out;
 
-char s[20002];
-int z[40002];
+char s[200002];
+int z[200002];
 
 struct node {
 	int l, r, par, link;
@@ -39,7 +39,7 @@ struct node {
 	int &get(char c) { return next[c == '$' ? 26 : c - 'a']; }
 };
 
-node t[40002];
+node t[200002];
 int sz;
 
 struct state
@@ -114,14 +114,16 @@ void build_tree() {
 		tree_extend(i);
 }
 
-int len = 0;
+int vnum = 0;
 
 void printdfs(int v) {
-	int c;
-	len += t[v].len();
+	int c, par = 0;
+	if (v != 0)
+		fprintf(out, "%d %d %d\n", t[v].par, t[v].l, t[v].r);
+	par = vnum;
 	for (int i = 0; i < 27; i++)
 		if ((c = t[v].get(i == 0 ? '$' : i + 'a' - 1)) != -1)
-			printdfs(c);
+			t[c].par = par, vnum++, printdfs(c);
 }
 
 int main()
@@ -133,16 +135,16 @@ int main()
 	int stateBeg, stateFin;
 
 	n = 0;
-	in = fopen("substr.in", "r");
-	out = fopen("substr.out", "w");
+	in = fopen("suftree.in", "r");
+	out = fopen("suftree.out", "w");
 
-	while (fscanf(in, "%c", &s[n]), s[n++] >= 32);
-	s[n - 1] = '$';
-	//while (fscanf(in, "%c", &s[n]), s[n++] != '$');
+	//while (fscanf(in, "%c", &s[n]), s[n++] >= 32);
+	//s[n - 1] = '$';
+	while (fscanf(in, "%c", &s[n]), s[n++] != '$');
 
 	build_tree();
+	fprintf(out, "%d\n", sz);
 	printdfs(0);
-	fprintf(out, "%d\n", len - n);
 
 	fclose(in);
 	fclose(out);
