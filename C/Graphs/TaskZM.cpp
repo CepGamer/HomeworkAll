@@ -35,10 +35,9 @@ long long azaz = 0;
 FILE *in, *out;
 
 struct edge {
-	edge(int d, int c, int f, edge* n, bool i) : dest(d), cap(c), flow(f), neigh(n), isGen(i) {}
+	edge(int d, int c, int f, edge* n) : dest(d), cap(c), flow(f), neigh(n) {}
 	int dest, cap, flow;
 	edge* neigh;
-	bool isGen;
 };
 
 int bloc[N], way[N], ptr[N];
@@ -102,8 +101,8 @@ int main()
 	//	long long i;
 	char d;
 
-	in = fopen("flow.in", "r");
-	out = fopen("flow.out", "w");
+	in = fopen("flow2.in", "r");
+	out = fopen("flow2.out", "w");
 
 	fscanf(in, "%d%d", &n, &m);
 	s = 0, t = n - 1;
@@ -115,8 +114,8 @@ int main()
 		edge *t1, *t2;
 		fscanf(in, "%d%d%d", &a, &b, &c);
 		a--, b--;
-		t1 = new edge(b, c, 0, nullptr, true);
-		t2 = new edge(a, c, 0, t1, false);
+		t1 = new edge(b, c, 0, nullptr);
+		t2 = new edge(a, 0, 0, t1);
 		t1->neigh = t2;
 		graph[a].push_back(t1);
 		graph[b].push_back(t2);
