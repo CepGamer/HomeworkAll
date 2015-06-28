@@ -146,6 +146,7 @@ int main()
     getarr(0, 0, n - 1);
     for(i = 0; i < n; i++)
         fprintf(out, "%d ", (int)arr[i]);
+
     fclose(in);
     fclose(out);
     return 0;
