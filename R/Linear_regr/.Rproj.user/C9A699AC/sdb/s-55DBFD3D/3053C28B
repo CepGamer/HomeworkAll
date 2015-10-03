@@ -1,0 +1,17 @@
+{
+    "contents" : "x <- file(\"task_1_capital.txt\", open = \"r\")\nvaluesstr <- read.table(x)\naxes <- valuesstr[1,]\nvalues <- matrix(1, length(valuesstr[,1]), length(valuesstr[1,]))\nfor (i in 2:length(valuesstr[,1])){\n  values[i,1] <- as.integer(as.character(valuesstr[i,1]))\n  values[i,2] <- as.integer(as.character(valuesstr[i,2]))\n}\n\nw = values[-1,1]\ny = values[-1,2]\ninversed = ginv(w)\nx = inversed * y\nplot(values[-1,1], x * w)\n",
+    "created" : 1443906350355.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "1135956144",
+    "id" : "3053C28B",
+    "lastKnownWriteTime" : 1443912789,
+    "path" : "C:/Program Files/RStudio/Projects/Linear_regr/linear_regr.r",
+    "project_path" : "linear_regr.r",
+    "properties" : {
+    },
+    "relative_order" : 1,
+    "source_on_save" : false,
+    "type" : "r_source"
+}
