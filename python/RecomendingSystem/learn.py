@@ -3,8 +3,7 @@ import math
 import datetime
 import sqlite3
 import random
-
-from multiprocessing import Pool
+import copy
 
 dbFile = 'songlog.db'
 db = sqlite3.connect(dbFile)
@@ -22,6 +21,8 @@ for i in range(0, len(userIds)):
 clusterNum = 5
 clusterCentres = [0] * clusterNum
 
+globalRate = 0
+
 # fetch songs for users
 for id in userIds:
     global userSongs
@@ -30,9 +31,14 @@ for id in userIds:
     if len(learn) == 0:
         continue
     songs = learn[0]
-    ratings = map(lambda x: math.log(float(x), 2.0) + 1.0, learn[1])
+    m = max(learn[1])
+    ratings = map(lambda x: x / m, learn[1])
+
     for i, song in enumerate(songs):
         userSongs[id][song] = ratings[i]
+    if len(songs) > 0:
+        userSongs[id][-1] = math.sqrt(sum(map(lambda x: x * x, learn[1])))
+    globalRate = max([m, globalRate])
 
 # Select random users as centroids
 def getRand():
@@ -41,11 +47,11 @@ def getRand():
     n = len(userIds)
     for i in range(0, clusterNum):
         x = random.randint(0, n - 1)
-        while x in clusters:
+        while x in clusters and len(userSongs[x]) > 0:
             x = random.randint(0, n - 1)
         clusters += [x]
         userClusters[x] = i
-        clusterCentres[i] = userSongs[x]
+        clusterCentres[i] = copy.deepcopy(userSongs[x])
 
 # Classify fun
 def classify():
@@ -61,6 +67,8 @@ def classify():
             for song in dicti:
                 if song in cdict:
                     x += dicti[song] * cdict[song]
+            if len(dicti) > 0 and cdict[-1] > 0:
+                x /= dicti[-1] * cdict[-1]
             if x > maxs:
                 maxs = x
                 maxi = cid
@@ -71,10 +79,9 @@ newCentres = [0] * clusterNum
 # Minimise fun
 def minimisation():
     global newCentres
-    global clusterNum
-    global clusterCentres
     global userClusters
     global userSongs
+    global clusterNum
 
     for i in range(0, clusterNum):
         newCentres[i] = dict()
@@ -90,8 +97,11 @@ def minimisation():
                 count[userClusters[id]][song] = 1
                 newCentres[userClusters[id]][song] = dicti[song]
     for i in range(0, clusterNum):
+        x = 0
         for song in newCentres[i]:
             newCentres[i][song] /= count[i][song]
+            x += (lambda x: x * x)(newCentres[i][song])
+        newCentres[i][-1] = math.sqrt(x)
 
 maxCount = 15
 
@@ -112,10 +122,31 @@ def kMeans():
         minimisation()
         if newCentres == clusterCentres:
             x = 0
-        clusterCentres = newCentres
+        clusterCentres = copy.deepcopy(newCentres)
+
+    retval = 0
+    for id, user in enumerate(userSongs):
+        x = 0
+        for song in user:
+            if song in clusterCentres[userClusters[id]]:
+                x += user[song] * clusterCentres[userClusters[id]][song]
+        if len(user) > 0 and clusterCentres[userClusters[id]][-1] > 0:
+            x /= user[-1] * clusterCentres[userClusters[id]][-1]
+        retval += x
+    return retval
+
+bestRes = []
+bestVal = 0
+kMeanses = 10
 
 # run algo
-kMeans()
+for i in range(0, kMeanses):
+    x = kMeans()
+    if x > bestVal:
+        bestRes = copy.deepcopy(clusterCentres)
+        bestVal = x
+
+clusterCentres = bestRes
 
 test = zip(*db.execute('select user_id, song_id, amount from testlog;'))
 
@@ -139,8 +170,8 @@ for i, id in enumerate(test[0]):
     mseSum += d * d
     testCount += 1
 
-nmae = (maeSum / testCount)
-nrmse = math.sqrt(mseSum / testCount)
+nmae = (maeSum / testCount) / globalRate
+nrmse = math.sqrt(mseSum / testCount) / globalRate
 
 print "NMAE =", nmae
 print "NRMSE =", nrmse
