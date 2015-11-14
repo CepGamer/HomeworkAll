@@ -4,6 +4,7 @@ import datetime
 import sqlite3
 import random
 import copy
+import sys
 
 dbFile = 'songlog.db'
 db = sqlite3.connect(dbFile)
@@ -18,7 +19,7 @@ for i in range(0, len(userIds)):
     userSongs += [dict()]
 
 # define clusters
-clusterNum = 5
+clusterNum = int(sys.argv[1])
 clusterCentres = [0] * clusterNum
 
 globalRate = 0
@@ -173,8 +174,8 @@ for i, id in enumerate(test[0]):
 nmae = (maeSum / testCount) / globalRate
 nrmse = math.sqrt(mseSum / testCount) / globalRate
 
-print "NMAE =", nmae
-print "NRMSE =", nrmse
+strToPrint = "Clusters: {}\nNMAE: {}\nNRMSE: {}\n".format(clusterNum, nmae, nrmse)
+print strToPrint
 
 db.close()
 
