@@ -3,6 +3,7 @@ from aubio import fft, source, fvec
 from pydub import AudioSegment
 import sys
 import math
+from pylab import plot, show
 
 if len(sys.argv) < 2:
     print "Usage: %s <source_filename>" % sys.argv[0]
@@ -41,7 +42,7 @@ while True:
     for i, x in enumerate(fftgrain.phas):
         if x <= 0 or math.isnan(x) or math.isnan(fftgrain.norm[i]):
             continue
-        lg = math.log(x, 2)
+        lg = math.log(x, 2) 
         c = lg - math.floor(lg) + 1 / 24
         c *= chromas
         c = int(c) % chromas
@@ -49,7 +50,9 @@ while True:
 
     chromagram += [tmp]
     window += 1
-    if read < hop_s or window == 100:
+    if read < hop_s or window == 1000:
+        plot(fftgrain.phas)
+        show()
         break
 
 print 'Start resize'
