@@ -26,6 +26,7 @@ else:
 # read file
 src, samplerate = load(songname)
 
+print samplerate
 # constants
 chromas = 12
 
@@ -36,6 +37,19 @@ for i, _ in enumerate(chromagram):
 
 # count correlation
 correlation = np.dot(chromagram, np.transpose(chromagram))
+
+# filter correlation
+t = np.ndarray(buffer = np.zeros(correlation.shape[0] * correlation.shape[1]), shape=correlation.shape, dtype = float)
+for i in range(0, correlation.size):
+    for j in range(0, correlation.size):
+        for k in range(5, 60):
+            if k + i + j >= correlation.size:
+                break
+            t[i][j] += correlation[i + k][i + j + k]
+
+res = np.argmax(t)
+print res / t.size
+print res % t.size
 
 # show graph
 # specshow(correlation, y_axis = "chroma", x_axis = "time")
