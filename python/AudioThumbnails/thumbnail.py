@@ -1,9 +1,10 @@
 import numpy as np
-from aubio import fft, source, fvec
-from pydub import AudioSegment
+from librosa import load
+from librosa.feature import chroma_stft
+from librosa.display import specshow
 import sys
 import math
-from pylab import plot, show
+import matplotlib.pyplot as plot
 
 if len(sys.argv) < 2:
     print "Usage: %s <source_filename>" % sys.argv[0]
@@ -14,49 +15,32 @@ hop_s = win_s / 4           # hop size
 
 songname = sys.argv[1].split('.')
 if songname[-1] == 'mp3':
-	song = AudioSegment.from_mp3('.'.join(songname))
-	songname[-1] = "wav"
-	songname = '.'.join(songname)
-	song.export(songname, format = "wav")
+    from pydub import AudioSegment
+    song = AudioSegment.from_mp3('.'.join(songname))
+    songname[-1] = "wav"
+    songname = '.'.join(songname)
+    song.export(songname, format = "wav")
 else:
-	songname = '.'.join(songname)
+    songname = '.'.join(songname)
 
 # read file
-src = source(songname, 0, hop_s)
-f = fft(win_s)
-chromas = 12
-# chromagram = np.ndarray(shape = (0, chromas), dtype = float)
-chromagram = []
+src, samplerate = load(songname)
+
 # constants
-maxSum = 1500
+chromas = 12
 
-window = 0
 # get chromagram
-while True:
-    samples, read = src()
-    fftgrain = f(samples)
-    if np.sum(fftgrain.norm) > maxSum:
-		continue
-    # tmp = np.ndarray(buffer=np.zeros(chromas), shape = (chromas, 1), dtype = float)
-    tmp = [0] * 12
-    for i, x in enumerate(fftgrain.phas):
-        if x <= 0 or math.isnan(x) or math.isnan(fftgrain.norm[i]):
-            continue
-        lg = math.log(x, 2) 
-        c = lg - math.floor(lg) + 1 / 24
-        c *= chromas
-        c = int(c) % chromas
-        tmp[c] += fftgrain.norm[i]
-
-    chromagram += [tmp]
-    window += 1
-    if read < hop_s or window == 1000:
-        plot(fftgrain.phas)
-        show()
-        break
-
-print 'Start resize'
-chromagram = np.ndarray(buffer=np.array(chromagram), shape = (chromas, len(chromagram)), dtype = float)
+chromagram = np.transpose(chroma_stft(y = src, sr = samplerate))
+for i, _ in enumerate(chromagram):
+    chromagram[i] = np.divide(chromagram[i], math.sqrt(np.dot(chromagram[i], chromagram[i])))
 
 # count correlation
+correlation = np.dot(chromagram, np.transpose(chromagram))
+
+# show graph
+# specshow(correlation, y_axis = "chroma", x_axis = "time")
+# plot.colorbar()
+# plot.title("Chromagram")
+# plot.tight_layout()
+# plot.show()
 
