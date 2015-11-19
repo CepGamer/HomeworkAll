@@ -39,7 +39,6 @@ chromagram = chroma_stft(y = src, sr = samplerate, hop_length = 512 * 8)
 
 printDt(stime, time())
 
-print chromagram.shape
 # count correlation
 print 'count correlation'
 correlation = np.corrcoef(
@@ -50,6 +49,7 @@ corsize = correlation.shape[0]
 printDt(stime, time())
 
 thumbnailSize = int(22 / dur * corsize)
+startSec = int(5 / dur * corsize)
 
 # filter correlation
 print 'filter correlation'
@@ -57,9 +57,9 @@ print 'filter correlation'
 mx = 0
 mix = 0
 mjx = 0
-for i in range(5, corsize):
+for i in range(thumbnailSize, corsize):
     item = np.diagonal(correlation, offset = -i)
-    for j in range(thumbnailSize, corsize - i):
+    for j in range(startSec, corsize - i):
         x = max(np.sum(item[j:j + thumbnailSize]), 0)
         if x > mx:
             mx = x
@@ -71,9 +71,9 @@ printDt(stime, time())
 print 'value:'
 print mx
 print 'start point:'
-print mix / corsize * dur
+print mjx * dur / corsize
 print 'lag:'
-print mjx / corsize * dur
+print mix * dur / corsize 
 
 # show graph
 # specshow(correlation, y_axis = "chroma", x_axis = "time")
