@@ -6,6 +6,7 @@ import sys
 import math
 from datetime import timedelta
 from time import time
+from multiprocessing import Pool
 
 if len(sys.argv) < 2:
     print "Usage: %s <source_filename>" % sys.argv[0]
@@ -24,44 +25,42 @@ if songname[-1] == 'mp3':
 else:
     songname = '.'.join(songname)
 
+print 'Start reading file'
 # read file
 src, samplerate = load(songname)
 dur = get_duration(y=src, sr=samplerate)
-
-# constants
-chromas = 12
 
 # set time
 stime = time()
 
 # get chromagram
 print 'get chromagram'
-chromagram = chroma_stft(y = src, sr = samplerate)
+chromagram = chroma_stft(y = src, sr = samplerate, hop_length = 512 * 8)
 
 printDt(stime, time())
 
-# count correlation
 print chromagram.shape
+# count correlation
 print 'count correlation'
 correlation = np.corrcoef(
     np.cov(np.transpose(chromagram)))
 
+corsize = correlation.shape[0]
+
 printDt(stime, time())
 
-thumbnailSize = int(22 / dur * correlation.size)
+thumbnailSize = int(22 / dur * corsize)
 
 # filter correlation
 print 'filter correlation'
+# procs = Pool()
 mx = 0
 mix = 0
 mjx = 0
-for i in range(0, correlation.size):
+for i in range(5, corsize):
     item = np.diagonal(correlation, offset = -i)
-    if i % 10 == 0:
-        print i
-    for j in range(0, correlation.size - i):
-        x = 0
-        x = max(np.sum(item[j:j + thumbnailSize]), x)
+    for j in range(thumbnailSize, corsize - i):
+        x = max(np.sum(item[j:j + thumbnailSize]), 0)
         if x > mx:
             mx = x
             mix = i
@@ -69,10 +68,12 @@ for i in range(0, correlation.size):
 
 printDt(stime, time())
 
+print 'value:'
+print mx
 print 'start point:'
-print mix / correlation.size * dur
+print mix / corsize * dur
 print 'lag:'
-print mjx / correlation.size * dur
+print mjx / corsize * dur
 
 # show graph
 # specshow(correlation, y_axis = "chroma", x_axis = "time")
