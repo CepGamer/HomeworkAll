@@ -39,17 +39,27 @@ for i, _ in enumerate(chromagram):
 correlation = np.dot(chromagram, np.transpose(chromagram))
 
 # filter correlation
-t = np.ndarray(buffer = np.zeros(correlation.shape[0] * correlation.shape[1]), shape=correlation.shape, dtype = float)
+t = [0] * correlation.size
 for i in range(0, correlation.size):
-    for j in range(0, correlation.size):
-        for k in range(5, 60):
-            if k + i + j >= correlation.size:
-                break
-            t[i][j] += correlation[i + k][i + j + k]
+    t[i] = np.append(np.diagonal(correlation, offset = -i), np.zeros(i))
 
-res = np.argmax(t)
-print res / t.size
-print res % t.size
+mx = 0
+mix = 0
+mjx = 0
+for i in range(0, correlation.size):
+    for j in range(0, correlation.size - i):
+        x = 0
+        for k in range(5, 60):
+            if j + k >= correlation.size + 1:
+                break
+            x = max(np.sum(t[i][j+5:j+k]), x)
+        if x > mx:
+            mx = x
+            mix = i
+            mjx = j
+
+print mix
+print mjx
 
 # show graph
 # specshow(correlation, y_axis = "chroma", x_axis = "time")
