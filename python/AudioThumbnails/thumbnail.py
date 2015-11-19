@@ -1,17 +1,18 @@
 import numpy as np
-from librosa import load
+from librosa import load, get_duration
 from librosa.feature import chroma_stft
 from librosa.display import specshow
 import sys
 import math
-import matplotlib.pyplot as plot
+from datetime import timedelta
+from time import time
 
 if len(sys.argv) < 2:
     print "Usage: %s <source_filename>" % sys.argv[0]
     sys.exit(1)
 
-win_s = 512                 # fft size
-hop_s = win_s / 4           # hop size
+def printDt(s, f):
+    print 'Total passed: ' + str(timedelta(seconds = f - s))
 
 songname = sys.argv[1].split('.')
 if songname[-1] == 'mp3':
@@ -25,41 +26,53 @@ else:
 
 # read file
 src, samplerate = load(songname)
+dur = get_duration(y=src, sr=samplerate)
 
-print samplerate
 # constants
 chromas = 12
 
+# set time
+stime = time()
+
 # get chromagram
-chromagram = np.transpose(chroma_stft(y = src, sr = samplerate))
-for i, _ in enumerate(chromagram):
-    chromagram[i] = np.divide(chromagram[i], math.sqrt(np.dot(chromagram[i], chromagram[i])))
+print 'get chromagram'
+chromagram = chroma_stft(y = src, sr = samplerate)
+
+printDt(stime, time())
 
 # count correlation
-correlation = np.dot(chromagram, np.transpose(chromagram))
+print chromagram.shape
+print 'count correlation'
+correlation = np.corrcoef(
+    np.cov(np.transpose(chromagram)))
+
+printDt(stime, time())
+
+thumbnailSize = int(22 / dur * correlation.size)
 
 # filter correlation
-t = [0] * correlation.size
-for i in range(0, correlation.size):
-    t[i] = np.append(np.diagonal(correlation, offset = -i), np.zeros(i))
-
+print 'filter correlation'
 mx = 0
 mix = 0
 mjx = 0
 for i in range(0, correlation.size):
+    item = np.diagonal(correlation, offset = -i)
+    if i % 10 == 0:
+        print i
     for j in range(0, correlation.size - i):
         x = 0
-        for k in range(5, 60):
-            if j + k >= correlation.size + 1:
-                break
-            x = max(np.sum(t[i][j+5:j+k]), x)
+        x = max(np.sum(item[j:j + thumbnailSize]), x)
         if x > mx:
             mx = x
             mix = i
             mjx = j
 
-print mix
-print mjx
+printDt(stime, time())
+
+print 'start point:'
+print mix / correlation.size * dur
+print 'lag:'
+print mjx / correlation.size * dur
 
 # show graph
 # specshow(correlation, y_axis = "chroma", x_axis = "time")
