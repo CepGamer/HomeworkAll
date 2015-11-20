@@ -6,7 +6,6 @@ import sys
 import math
 from datetime import timedelta
 from time import time
-from multiprocessing import Pool
 
 if len(sys.argv) < 2:
     print "Usage: %s <source_filename>" % sys.argv[0]
@@ -70,6 +69,8 @@ printDt(stime, time())
 
 print 'value:'
 print mx
+print 'length:'
+print thumbnailSize * dur / corsize
 print 'start point:'
 print mjx * dur / corsize
 print 'lag:'
