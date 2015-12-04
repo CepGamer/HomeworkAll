@@ -3,9 +3,9 @@
 happy = u'happy'
 sad = u'sad'
 
-def parseData(filename):
+def parseData(trainData):
 	from re import sub
-	f = open(filename, 'r').read().split('\n')
+	f = open(trainData, 'r').read().split('\n')
 	posts = [0] * len(f)
 	for i, string in enumerate(f):
 		try:
@@ -58,12 +58,24 @@ def getResults(model):
 	print t
 	return t
 	
-filename = 'train_content.csv'
+trainData = 'train_content.csv'
+modelname = 'word2vec.csv'
 
 def do():
-	x = parseData(filename)
+	x = parseData(trainData)
+	print 'Begin stemming data'
 	y = stemData(x)
+	f = open('stemmed_data.csv', 'w')
+	print 'Write stemmed data'
+	f.write('\n'.join(y))
+	f.close()
+	
+	print 'Begin training'
 	z = train(y)
+	z.save(modelname)
+	z = Word2Vec.load(modelname)
+	
+	print 'Get results'
 	t = getResults(z)
 	open('tmp.txt', 'w').write(t)
 	
