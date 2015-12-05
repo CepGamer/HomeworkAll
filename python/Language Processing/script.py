@@ -60,21 +60,29 @@ def parseData(trainData):
 def stemData(posts):
 	global happy
 	global sad
+	
+	global shouldStemData
+	
 	from nltk.stem.snowball import RussianStemmer
 	from nltk import word_tokenize, sent_tokenize
 	stemmer = RussianStemmer()
-	# renew smiles
-	happy = stemmer.stem(happy)
-	sad = stemmer.stem(sad)
-	
 	toRet = []
+	if shouldStemData:
+		# renew smiles
+		happy = stemmer.stem(happy)
+		sad = stemmer.stem(sad)
+		
 	for i in range(0, len(posts)):
 		sentences = sent_tokenize(posts[i])
 		for j in range(0, len(sentences)):
 			words = word_tokenize(sentences[j])
+			import string
 			for k in range(0, len(words)):
 				try:
-					words[k] = cyr_to_r(unicode(stemmer.stem(words[k]))).encode('utf8')
+					if shouldStemData:
+						words[k] = unicode(stemmer.stem(words[k]))
+					words[k] = cyr_to_r(words[k]).encode('utf8')
+					words[k] = filter(lambda x: x in string.letters + string.digits + '.!?', words[k])
 				except Exception:
 					print 'failed word: ' + words[k]
 					raise Exception('')
@@ -95,11 +103,19 @@ def getResults(model):
 	global happy
 	global sad
 	t = 'Positive smile alike:\n'
-	for x in model.most_similar(positive = [happy], negative = [sad]):
+	for x in model.most_similar(positive = [happy], negative = [sad], topn = 25):
 		t += x[0] + ' ' + str(x[1])
 		t += '\n'
-	t += 'Negative smile alike:\n'
-	for x in model.most_similar(positive = [sad], negative = [happy]):
+	t += '\n'
+	for x in model.most_similar(positive = [happy], negative = [], topn = 25):
+		t += x[0] + ' ' + str(x[1])
+		t += '\n'
+	t += '\nNegative smile alike:\n'
+	for x in model.most_similar(positive = [sad], negative = [happy], topn = 25):
+		t += x[0] + ' ' + str(x[1])
+		t += '\n'
+	t += '\n'
+	for x in model.most_similar(positive = [sad], negative = [], topn = 25):
 		t += x[0] + ' ' + str(x[1])
 		t += '\n'
 	print t
@@ -108,32 +124,39 @@ def getResults(model):
 trainData = 'train_content.csv'
 modelname = 'word2vec.csv'
 
+shouldStemData = False
+shouldSaveModel = True
+
 def do():
+	global shouldStemData
+	global shouldSaveModel
 	from os.path import isfile
 	from gensim.models import Word2Vec
 	if not isfile(modelname):
 		parsed = parseData(trainData)
 		print 'Begin stemming data'
-		stemmed = stemData(parsed[0:100000])
-		try:
-			print 'Write stemmed data'
-			f = open('stemmed_data.csv', 'w')
-			f.write('\n'.join(stemmed))
-		except Exception:
-			print 'Failed to write'
-		finally:
-			f.close()
+		parsed = stemData(parsed)
+		if False:
+			try:
+				print 'Write stemmed data'
+				f = open('stemmed_data.csv', 'w')
+				f.write('\n'.join(map(lambda x: ' '.join(x), parsed)))
+			except Exception:
+				print 'Failed to write'
+			finally:
+				f.close()
 		
 		print 'Begin training'
-		model = train(stemmed)
+		model = train(parsed)
 		
-		print 'Save model'
-		model.save(modelname)
+		if shouldSaveModel:
+			print 'Save model'
+			model.save(modelname)
+
 	else:
 		stemData([])
-	
-	model = Word2Vec.load(modelname)
-	
+		model = Word2Vec.load(modelname)
+		
 	print 'Get results'
 	t = getResults(model)
 	open('tmp.txt', 'w').write(t)
