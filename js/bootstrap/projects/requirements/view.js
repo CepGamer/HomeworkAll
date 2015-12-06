@@ -33,30 +33,4 @@ function createMap(){
         map.setCenter(points.routes[selected].features[0].geometry.coordinates);
         objectManager.add(points.routes[selected]);
     });
-
-    map.events.add('click', function (e) {
-        if (!map.balloon.isOpen()) {
-            var coords = e.get('coords');
-            map.balloon.open(coords, {
-                contentHeader:'Событие!',
-                contentBody:'<p>Кто-то щелкнул по карте.</p>' +
-                    '<p>Координаты щелчка: ' + [
-                    coords[0].toPrecision(8),
-                    coords[1].toPrecision(8)
-                    ].join(', ') + '</p>',
-                contentFooter:'<sup>Щелкните еще раз</sup>'
-            });
-        }
-        else {
-            map.balloon.close();
-        }
-    });
-
-    map.events.add('contextmenu', function (e) {
-        map.hint.open(e.get('coords'), 'Кто-то щелкнул правой кнопкой');
-    });
-    
-    map.events.add('balloonopen', function (e) {
-        map.hint.close();
-    });
 }
