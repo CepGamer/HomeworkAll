@@ -1,0 +1,17 @@
+{
+    "routes": [
+        {
+            "type": "FeatureCollection",
+            "features": [
+                {"type": "Feature", "id": 0, "geometry": {"type": "Point", "coordinates": [59.876794, 29.829757]}, "properties": {"balloonContent": "Старт", "clusterCaption": "Контрольная точка", "hintContent": ""}},
+                {"type": "Feature", "id": 1, "geometry": {"type": "Point", "coordinates": [59.863633, 29.811090]}, "properties": {"balloonContent": "Контрольная точка 1", "clusterCaption": "Контрольная точка", "hintContent": ""}},
+                {"type": "Feature", "id": 2, "geometry": {"type": "Point", "coordinates": [59.813453, 29.919905]}, "properties": {"balloonContent": "Контрольная точка 2", "clusterCaption": "Контрольная точка", "hintContent": ""}},
+                {"type": "Feature", "id": 3, "geometry": {"type": "Point", "coordinates": [59.800993, 30.149424]}, "properties": {"balloonContent": "Контрольная точка 3", "clusterCaption": "Контрольная точка", "hintContent": ""}},
+                {"type": "Feature", "id": 4, "geometry": {"type": "Point", "coordinates": [59.872182, 30.252100]}, "properties": {"balloonContent": "Контрольная точка 4", "clusterCaption": "Контрольная точка", "hintContent": ""}},
+                {"type": "Feature", "id": 5, "geometry": {"type": "Point", "coordinates": [59.923509, 30.299267]}, "properties": {"balloonContent": "Контрольная точка 5", "clusterCaption": "Контрольная точка", "hintContent": ""}},
+                {"type": "Feature", "id": 6, "geometry": {"type": "Point", "coordinates": [59.938441, 30.280677]}, "properties": {"balloonContent": "Контрольная точка 6", "clusterCaption": "Контрольная точка", "hintContent": ""}},
+                {"type": "Feature", "id": 7, "geometry": {"type": "Point", "coordinates": [59.938473, 30.270528]}, "properties": {"balloonContent": "Финиш", "clusterCaption": "Контрольная точка", "hintContent": ""}}
+            ]
+        }
+    ]
+}
