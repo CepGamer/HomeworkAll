@@ -3,43 +3,6 @@
 happy = u'крибибопа'
 sad = u'квазиблипа'
 
-def cyr_to_r(word):
-    word = (word.replace(u"а", "a").replace(u"а", "a")
-                .replace(u"б", "b").replace(u"б", "b")
-                .replace(u"в", "v").replace(u"в", "v")
-                .replace(u"г", "g").replace(u"г", "g")
-                .replace(u"д", "d").replace(u"д", "d")
-                .replace(u"е", "e").replace(u"е", "e")
-                .replace(u"ё", "e").replace(u"ё", "e")
-                .replace(u"ж", "zh").replace(u"ж", "zh")
-                .replace(u"з", "z").replace(u"з", "z")
-                .replace(u"и", "i").replace(u"и", "i")
-                .replace(u"й", "i`").replace(u"й", "i`")
-                .replace(u"к", "k").replace(u"к", "k")
-                .replace(u"л", "l").replace(u"л", "l")
-                .replace(u"м", "m").replace(u"м", "m")
-                .replace(u"н", "n").replace(u"н", "n")
-                .replace(u"о", "o").replace(u"о", "o")
-                .replace(u"п", "p").replace(u"п", "p")
-                .replace(u"р", "r").replace(u"р", "r")
-                .replace(u"с", "s").replace(u"с", "s")
-                .replace(u"т", "t").replace(u"т", "t")
-                .replace(u"у", "u").replace(u"у", "u")
-                .replace(u"ф", "f").replace(u"ф", "f")
-                .replace(u"х", "kh").replace(u"х", "kh")
-                .replace(u"ц", "t^s").replace(u"ц", "t^s")
-                .replace(u"ч", "ch").replace(u"ч", "ch")
-                .replace(u"ш", "sh").replace(u"ш", "sh")
-                .replace(u"щ", "shch").replace(u"щ", "shch")
-                .replace(u"ъ", "''").replace(u"ъ", "''")
-                .replace(u"ы", "y").replace(u"ы", "y")
-                .replace(u"ь", "'").replace(u"ь", "'")
-                .replace(u"э", "e`").replace(u"э", "e`")
-                .replace(u"ю", "i^u").replace(u"ю", "i^u")
-                .replace(u"я", "i^a").replace(u"я", "i^a"))
-
-    return word
-
 def parseData(trainData):
     global happy
     global sad
@@ -50,8 +13,8 @@ def parseData(trainData):
     for i, string in enumerate(f):
         try:
             wo_pics = sub('Images\[[0123456789]+(, [0123456789]+)*\]', 'Images', string.split('\t')[3])
-            smile = sub('(:-*\)+)|(\)\)+)', happy, wo_pics)
-            posts[i] = sub('(:+-*\(+)|(\(\(+)', sad, smile)
+            smile = sub('(:-*\)+)|(\)\)+)', ' ' + happy + '. ' + happy + '.', wo_pics)
+            posts[i] = sub('(:+-*\(+)|(\(\(+)', ' ' + sad + '. ' + sad + '.', smile)
         except Exception:
             if len(string) > 3:
                 print 'Could not replace: ' + string.split('\t')[3]
@@ -59,16 +22,21 @@ def parseData(trainData):
     fi.close()
     return posts
 
+label = u"ПРЕДЛ_{}"
+
 def stemData(posts):
     global happy
     global sad
     
+    global label
     global shouldStemData
     
     from nltk.stem.snowball import RussianStemmer
     from nltk import word_tokenize, sent_tokenize
+    from gensim.models.doc2vec import LabeledSentence
     stemmer = RussianStemmer()
     toRet = []
+    curI = 0
     if shouldStemData:
         # renew smiles
         happy = stemmer.stem(happy)
@@ -90,17 +58,19 @@ def stemData(posts):
                     print 'failed word: ' + words[k]
                     raise Exception('')
             try:
-                sentences[j] = words
-            except Exception:
+                if words == [happy, '.']:
+                    sentences[j] = LabeledSentence(words=words, tags=[happy])
+                elif words == [sad, '.']:
+                    sentences[j] = LabeledSentence(words=words, tags=[sad])
+                else:
+                    sentences[j] = LabeledSentence(words=words, tags=[label.format(curI)])
+                    curI += 1
+            except Exception, e:
                 print words
                 sentences[j] = ['']
+                raise e
         toRet += sentences
     return toRet
-
-def train(sentence):
-    from gensim.models import Word2Vec
-    model = Word2Vec(sentences=sentence, size=100, workers=4, window=5, min_count=5)
-    return model
     
 def getResults(model):
     global happy
@@ -127,7 +97,7 @@ def getResults(model):
 trainData = 'train_content.csv'
 testData = 'test_content.csv'
 
-modelname = 'word2vec.csv'
+modelname = 'Doc2Vec.csv'
 
 shouldStemData = True
 shouldSaveModel = True
@@ -136,10 +106,10 @@ def do():
     global shouldStemData
     global shouldSaveModel
     from os.path import isfile
-    from gensim.models import Word2Vec
+    from gensim.models import Doc2Vec
     from sys import argv
-        
-    if not isfile(modelname) or (len(argv) > 1 and argv[1] == '--update'):
+
+    if not isfile(modelname):# or (len(argv) > 1 and argv[1] == '--update'):
         parsed = parseData(trainData)
         print 'Begin stemming data'
         parsed = stemData(parsed)
@@ -157,12 +127,12 @@ def do():
                     print ''
 
         print 'Begin training'
-        if len(argv) > 1 and argv[1] == '--update':
+        if False:#len(argv) > 1 and argv[1] == '--update':
             print 'Update model'
-            model = Word2Vec.load(modelname)
-            model.train(sentences=parsed)
+            model = Doc2Vec.load(modelname)
+            model.train(documents=parsed)
         else:
-            model = train(parsed)
+            model = Doc2Vec(documents=parsed)#, size=100, workers=4, window=5, min_count=5)
         
         if shouldSaveModel:
             print 'Save model'
@@ -170,12 +140,14 @@ def do():
 
     else:
         stemData([])
-        model = Word2Vec.load(modelname)
+        model = Doc2Vec.load(modelname)
 
     print 'Get results'
-    # try:
-    t = getResults(model)
-    print model.similarity(happy, sad)
+    try:
+        t = getResults(model)
+    except Exception:
+        for x in model.most_similar(happy):
+            print x[0].encode('utf8')
     open('res.txt', 'w').write(t.encode('utf8'))
     # except Exception, e:
     #     print 'ошибка: ' + e
