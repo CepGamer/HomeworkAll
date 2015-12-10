@@ -13,8 +13,8 @@ def parseData(trainData):
     for i, string in enumerate(f):
         try:
             wo_pics = sub('Images\[[0123456789]+(, [0123456789]+)*\]', 'Images', string.split('\t')[3])
-            smile = sub('(:-*\)+)|(\)\)+)', ' ' + happy + '. ' + happy + '.', wo_pics)
-            posts[i] = sub('(:+-*\(+)|(\(\(+)', ' ' + sad + '. ' + sad + '.', smile)
+            smile = sub('(:-*\)+)|(\)\)+)', ' ' + happy + '. ', wo_pics)
+            posts[i] = sub('(:+-*\(+)|(\(\(+)', ' ' + sad + '. ', smile)
         except Exception:
             if len(string) > 3:
                 print 'Could not replace: ' + string.split('\t')[3]
@@ -22,13 +22,10 @@ def parseData(trainData):
     fi.close()
     return posts
 
-label = u"ПРЕДЛ_{}"
-
 def stemData(posts):
     global happy
     global sad
     
-    global label
     global shouldStemData
     
     from nltk.stem.snowball import RussianStemmer
@@ -63,7 +60,7 @@ def stemData(posts):
                 elif words == [sad, '.']:
                     sentences[j] = LabeledSentence(words=words, tags=[sad])
                 else:
-                    sentences[j] = LabeledSentence(words=words, tags=[label.format(curI)])
+                    sentences[j] = LabeledSentence(words=words, tags=[curI])
                     curI += 1
             except Exception, e:
                 print words
@@ -93,6 +90,22 @@ def getResults(model):
         t += '\n'
     print t
     return t
+
+def selectSmiles(posts, resFile):
+    from nltk import sent_tokenize
+    f = open(resFile, 'w')
+    r = ''
+    for x in posts:
+        sents = sent_tokenize(x)
+        for y in sents:
+            if happy in y:
+            r += y + '\n'
+    try:
+        f.write(r)
+    except Exception:
+        print ''
+    finally:
+        f.close()
     
 trainData = 'train_content.csv'
 testData = 'test_content.csv'
@@ -152,4 +165,8 @@ def do():
     # except Exception, e:
     #     print 'ошибка: ' + e
 
-do()
+def extract():
+    parsed = parseData(trainData)
+    selectSmiles(parsed)
+
+extract()
