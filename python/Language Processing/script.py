@@ -38,6 +38,8 @@ def stemData(posts):
         # renew smiles
         happy = stemmer.stem(happy)
         sad = stemmer.stem(sad)
+    positives = []
+    negatives = []
         
     for i in range(0, len(posts)):
         sentences = sent_tokenize(posts[i])
@@ -57,17 +59,25 @@ def stemData(posts):
             try:
                 if words == [happy, '.']:
                     sentences[j] = LabeledSentence(words=words, tags=[happy])
+                    if j > 0:
+                        positives += [curI - 1]
                 elif words == [sad, '.']:
                     sentences[j] = LabeledSentence(words=words, tags=[sad])
+                    if j > 0:
+                        negatives += [curI - 1]
                 else:
-                    sentences[j] = LabeledSentence(words=words, tags=[curI])
-                    curI += 1
+                    sentences[j] = LabeledSentence(words=words, tags=[str(curI)])
+                    if happy in words:
+                        positives += [curI]
+                    if sad in words:
+                        negatives += [curI]
+                curI += 1
             except Exception, e:
                 print words
                 sentences[j] = ['']
                 raise e
         toRet += sentences
-    return toRet
+    return toRet, positives, negatives
     
 def getResults(model):
     global happy
@@ -99,7 +109,7 @@ def selectSmiles(posts, resFile):
         sents = sent_tokenize(x)
         for y in sents:
             if happy in y:
-            r += y + '\n'
+                r += y + '\n'
     try:
         f.write(r)
     except Exception:
@@ -107,8 +117,8 @@ def selectSmiles(posts, resFile):
     finally:
         f.close()
     
-trainData = 'train_content.csv'
-testData = 'test_content.csv'
+trainData = "/tmp/train_content.csv"
+testData = "/tmp/test_content.csv"
 
 modelname = 'Doc2Vec.csv'
 
@@ -167,6 +177,70 @@ def do():
 
 def extract():
     parsed = parseData(trainData)
-    selectSmiles(parsed)
+    selectSmiles(parsed, "res.csv")
 
-extract()
+def closeToWord(stemmed, word, poss, model):
+    xk = [0] * len(stemmed)
+    yk = [0] * len(stemmed)
+    l = 0
+    m = len(poss)
+    for i in range(len(stemmed)):
+        xi = [0] * len(stemmed[i].words)
+        for j in range(len(stemmed[i].words)):
+            try:
+                xi[j] = model[stemmed[i].words[j]]
+            except Exception:
+                xi[j] = model.seeded_vector(stemmed[i].words[j])
+        xk[i] = xi
+        while l < m and poss[l] < i:
+            l += 1
+        if l == m:
+            l -= 1
+        yk[i] = 1 if poss[l] == i else 0
+    return xk, yk
+
+def classify():
+    global shouldStemData
+    global shouldSaveModel
+    from os.path import isfile
+    from gensim.models import Doc2Vec
+    from sys import argv
+
+    if not isfile(modelname):# or (len(argv) > 1 and argv[1] == '--update'):
+        parsed = parseData(trainData)
+        print 'Begin stemming data'
+        stemmed, poss, negs = stemData(parsed[0:1000])
+
+        print 'Begin training'
+        model = Doc2Vec(documents=stemmed)#, size=100, workers=4, window=5, min_count=5)
+        
+        if shouldSaveModel:
+            print 'Save model'
+            model.save(modelname)
+
+    else:
+        stemData([])
+        model = Doc2Vec.load(modelname)
+
+    print "Train Classifier"
+    from sklearn.ensemble import RandomForestClassifier
+    Pos = RandomForestClassifier()
+    x, y = closeToWord(stemmed, happy, poss, model)
+    Pos.fit(x, y)
+    for i in range(100):
+        print x[i], y[i]
+    return
+
+    n = len(negs)
+    for i in range(n):
+        x[i] = (stemmed[negs[i]])
+        y[i] = 1
+    
+    r = RandomForestClassifier()
+    r.fit(x, y)
+
+    print 'Test'
+    tparsed = parseData(testData)
+    tstemmed, tposs, tnegs = stemData(parsed[0:10000])
+
+classify()
