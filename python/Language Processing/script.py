@@ -179,13 +179,13 @@ def extract():
     parsed = parseData(trainData)
     selectSmiles(parsed, "res.csv")
 
-def sumWords(stemmed, model):
-    xi = [0] * len(stemmed[i].words)
-    for j in range(len(stemmed[i].words)):
+def sumWords(sent, model):
+    xi = [0] * len(sent.words)
+    for j in range(len(sent.words)):
         try:
-            xi[j] = model[stemmed[i].words[j]]
+            xi[j] = model[sent.words[j]]
         except Exception:
-            xi[j] = model.seeded_vector(stemmed[i].words[j])
+            xi[j] = model.seeded_vector(sent.words[j])
     return np.divide(np.sum(xi, axis=0), len(xi))
 
 def testRandForest(classifier, model, stemmed, poss):
@@ -198,7 +198,7 @@ def testRandForest(classifier, model, stemmed, poss):
             l += 1
         if l == m:
             l -= 1
-        x = sumWords(stemmed, model)
+        x = sumWords(stemmed[i], model)
         y = classifier.predict(x)
         if y >= 0.5:
             if poss[l] == i:
@@ -215,7 +215,7 @@ def closeToWord(stemmed, word, poss, model):
     l = 0
     m = len(poss)
     for i in range(len(stemmed)):
-        xk[i] = sumWords(stemmed, model)
+        xk[i] = sumWords(stemmed[i], model)
         while l < m and poss[l] < i:
             l += 1
         if l == m:
