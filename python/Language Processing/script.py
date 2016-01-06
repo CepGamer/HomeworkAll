@@ -32,6 +32,9 @@ def stemData(posts):
     
     global shouldStemData
     
+    statHap = {}
+    statSad = {}
+    
     from nltk.stem.snowball import RussianStemmer
     from nltk import word_tokenize, sent_tokenize
     from gensim.models.doc2vec import LabeledSentence
@@ -79,10 +82,20 @@ def stemData(posts):
                         positives += [curI]
                         while happy in words:
                             words.remove(happy)
+                        for word in words:
+                            if word in statHap:
+                                statHap[word] += 1
+                            else:
+                                statHap[word] = 1
                     if sad in words:
                         negatives += [curI]
                         while sad in words:
                             words.remove(sad)
+                        for word in words:
+                            if word in statSad:
+                                statSad[word] += 1
+                            else:
+                                statSad[word] = 1
                     sentences[j] = LabeledSentence(words=words, tags=[str(curI)])
                 curI += 1
             except Exception, e:
@@ -90,8 +103,8 @@ def stemData(posts):
                 sentences[j] = ['']
                 raise e
         toRet += sentences
-    return toRet, positives, negatives
-    
+    return toRet, positives, negatives, statHap, statSad
+
 def getResults(model):
     global happy
     global sad
@@ -194,13 +207,13 @@ def extract():
     selectSmiles(parsed, "res.csv")
 
 def sumWords(sent, model):
-    xi = [0] * len(sent.words)
-    if len(sent.words) == 0:
-        return np.array([])
+    xi = [0] * len(sent)
+    if len(sent) == 0:
+        return model.seeded_vector("1234567890qwertyuiopasdfgjklzxcvbnm")
     inverted = False
-    for j, word in enumerate(sent.words):
+    for j, word in enumerate(sent):
         try:
-            #if word in invert:
+            # if word in invert:
             #    inverted = True
             if inverted:
                 xi[j] = model[model.most_similar(negative=[invert], topn=1)[0][0]]
@@ -250,7 +263,7 @@ def testRandForest(classifier, model, stemmed, poss):
     
     return guessedPos, guessedNeut, randWords
 
-def closeToWord(stemmed, word, poss, model):
+def closeToWord(stemmed, word, poss, model, statPos):
     xk = [0] * len(stemmed)
     yk = [0] * len(stemmed)
     l = 0
@@ -259,7 +272,7 @@ def closeToWord(stemmed, word, poss, model):
     for i in range(len(stemmed)):
         if i % 100000 == 0:
             print i
-        xk[i] = sumWords(stemmed[i], model)
+        xk[i] = sumWords(filter(lambda x: x in statPos, stemmed[i].words), model)
         while m !=0 and l < m and poss[l] < i:
             l += 1
         if l == m:
@@ -279,7 +292,7 @@ def classify():
         print 'Begin stemming data'
         #l = 351063
         #print parsed[l:l + 2]
-        stemmed, poss, negs = stemData(parsed)
+        stemmed, poss, negs, statHap, statSad = stemData(parsed)
         #print stemmed
         print 'Begin training'
         model = Doc2Vec(documents=stemmed)#, size=100, workers=4, window=5, min_count=5)
@@ -299,7 +312,13 @@ def classify():
     print "Train Classifier"
     from sklearn.ensemble import RandomForestClassifier
     Pos = RandomForestClassifier()
-    x, y = closeToWord(stemmed, happy, poss, model)
+    for entry in statHap:
+        if statHap[entry] < 5:
+            del statHap[entry]
+    for entry in statSad:
+        if statSad[entry] < 5:
+            del statSad[entry]
+    x, y = closeToWord(stemmed, happy, poss, model, statHap)
     Pos.fit(x, y)
     print "Done with happy" 
     try:
@@ -308,7 +327,7 @@ def classify():
     except Exception:
         gc.collect()
     Neg = RandomForestClassifier()
-#    x, y = closeToWord(stemmed, sad, negs, model)
+#    x, y = closeToWord(stemmed, sad, negs, model, statSad)
 #    Neg.fit(x, y)
     try:
         import gc
