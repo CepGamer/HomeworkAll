@@ -42,7 +42,7 @@
       <div class="container">
         <div class="collapse navbar-collapse">
           <ul class="nav navbar-nav">
-            <li class="active"><a class="" href="view.html">Просмотр маршрута</a></li>
+            <li class="active"><a class="" href="view.html">Экран диспетчера</a></li>
             <li><a class="" href="create.html">Создание маршрута</a></li>
             <li><a class="" href="history.html">История маршрутов</a></li>
           </ul>
@@ -51,7 +51,50 @@
     </nav>
 
     <div class="container">
-      <div id="map" style="width: 100%; height: 600px"></div>
+      <div class="row">
+        <div class="col-sm-8">
+          <div id="map" style="width: auto; height: 600px; margin: 10px"></div>
+        </div>
+        <div class="col-sm-4">
+          <button type="button" class="btn" style="width: 350px; margin: 10px">Выбран маршрут: 1</button>
+          <div class="btn-group-vertical" role="group" aria-label="..." style="width: 350px; margin: 10px">
+            <button type="button" class="btn btn-danger" style="width: inherit;">Критическая ситуация</button>
+            <table class="table table-bordered" style="width: inherit;">
+              <tr>
+                <td style="width: 50%;">Номер спиртовоза:</td>
+                <td>1</td>
+              </tr>
+              <tr>
+                <td>Расположение:</td>
+                <td><button type="button" class="btn" style="margin: auto;">Найти на карте</button></td>
+              </tr>
+              <tr>
+                <td>Описание:</td>
+                <td>Спиртовоз стоит более 5 минут</td>
+              </tr>
+            </table>
+          </div>
+          <button type="button" class="btn" style="width: 350px; margin: 10px">Показать грузовики на карте</button>
+          
+          <div class="btn-group-vertical" role="group" aria-label="..." style="width: 350px; margin: 10px">
+            <button type="button" class="btn btn-warning" style="width: inherit;">Есть неразрешённые ситуации:</button>
+            <table class="table table-bordered" style="width: inherit;">
+              <tr>
+                <td><button type="button" class="btn btn-warning" style="width: inherit;">Запрос об изменении маршрута</button></td>
+                <td>Грузовик 3</td>
+              </tr>
+              <tr>
+                <td><button type="button" class="btn btn-danger" style="width: inherit;">Критическая ситуация</button></td>
+                <td>Грузовик 2</td>
+              </tr>
+              <tr>
+                <td><button type="button" class="btn btn-success" style="width: inherit;">Доставка на контрольную точку</button></td>
+                <td>Грузовик 15</td>
+              </tr>
+            </table>
+          </div>
+        </div>
+      </div>
 
       <hr>
 

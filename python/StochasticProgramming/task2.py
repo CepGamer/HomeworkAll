@@ -91,22 +91,25 @@ def kmeans(w, k, max = 15):
             func += (a - b) * (a - b)
     return (func, clusters, mins)
 
-kmeanses = 5
-color = []
+def getImg():
+    kmeanses = 5
+    color = []
+    
+    for k in range(2, 4):
+        W = copy.deepcopy(dots)
+        val, clusters, color = kmeans(W, k)
+        bestClusters = clusters
+        for i in range(1, kmeanses):
+            l, clusters, cols = kmeans(W, k)
+            if l < val:
+                val = l
+                bestClusters = clusters
+                color = cols
+    
+        for i in range(W.size / W[0].size):
+            W[i] = color[bestClusters[i]]
+    
+        res = W.reshape(image.shape)
+        Image.fromarray(res).save(output.format(k))
 
-for k in range(2, 4):
-    W = copy.deepcopy(dots)
-    val, clusters, color = kmeans(W, k)
-    bestClusters = clusters
-    for i in range(1, kmeanses):
-        l, clusters, cols = kmeans(W, k)
-        if l < val:
-            val = l
-            bestClusters = clusters
-            color = cols
-
-    for i in range(W.size / W[0].size):
-        W[i] = color[bestClusters[i]]
-
-    res = W.reshape(image.shape)
-    Image.fromarray(res).save(output.format(k))
+getImg()
