@@ -34,6 +34,7 @@ def stemData(posts):
     
     statHap = {}
     statSad = {}
+    statAll = {}
     
     from nltk.stem.snowball import RussianStemmer
     from nltk import word_tokenize, sent_tokenize
@@ -47,7 +48,6 @@ def stemData(posts):
         sad = stemmer.stem(sad)
     positives = []
     negatives = []
-    
     for i in range(0, len(posts)):
         if i % 10000 == 0:
             print i
@@ -78,6 +78,11 @@ def stemData(posts):
                     if j > 0:
                         negatives += [curI - 1]
                 else:
+                    for word in words:
+                        if word in statAll:
+                            statAll[word] += 1
+                        else:
+                            statAll[word] = 1
                     if happy in words:
                         positives += [curI]
                         while happy in words:
@@ -103,7 +108,7 @@ def stemData(posts):
                 sentences[j] = ['']
                 raise e
         toRet += sentences
-    return toRet, positives, negatives, statHap, statSad
+    return toRet, positives, negatives, statHap, statSad, statAll
 
 def getResults(model):
     global happy
@@ -161,7 +166,7 @@ def do():
     if not isfile(modelname):# or (len(argv) > 1 and argv[1] == '--update'):
         parsed = parseData(trainData)
         print 'Begin stemming data'
-        parsed = stemData(parsed)
+        parsed = stemData(parsed[:10000])
         if False:
             try:
                 print 'Write stemmed data'
@@ -213,8 +218,8 @@ def sumWords(sent, model):
     inverted = False
     for j, word in enumerate(sent):
         try:
-            # if word in invert:
-            #    inverted = True
+            if word in invert:
+                inverted = True
             if inverted:
                 xi[j] = model[model.most_similar(negative=[invert], topn=1)[0][0]]
                 inverted = False
@@ -229,7 +234,7 @@ def sumWords(sent, model):
             break
     return np.divide(np.sum(xi, axis=0), len(xi))
 
-def testRandForest(classifier, model, stemmed, poss):
+def testRandForest(classifier, model, stemmed, poss, statPos):
     margin = 0.5
     guessedPos = 0
     guessedNeut = 0
@@ -242,7 +247,7 @@ def testRandForest(classifier, model, stemmed, poss):
             l += 1
         if l == m:
             l -= 1
-        x = sumWords(stemmed[i], model)
+        x = sumWords(filter(lambda x: x in statPos, stemmed[i].words), model)
         y = [0]
         try:
             y = classifier.predict(x.reshape(1, -1))
@@ -262,6 +267,42 @@ def testRandForest(classifier, model, stemmed, poss):
                 guessedNeut += 1
     
     return guessedPos, guessedNeut, randWords
+
+def testRandForest2(stemmed, poss, statPos, statNeg):
+    sp = 0
+    sn = 0
+    gp = 0
+    gn = 0
+    rw = [0] * 10
+    l = 0
+    k = 0
+    m = len(poss)
+    for i, sent in enumerate(stemmed):
+        while m != 0 and l < m and poss[l] < i:
+            l += 1
+        if l == m:
+            l -= 1
+        sp = 0
+        sn = 0
+        for w in sent.words:
+            if w in statPos:
+                sp += 1
+            if w in statNeg:
+                sn += 1
+        if sp > sn:
+            if m != 0 and poss[l] == i:
+                if k * (len(stemmed) / 10) < i:
+                    try:
+                        rw[k] = stemmed[i].words
+                        k += 1
+                    except Exception:
+                        pass
+                gp += 1
+            else:
+                if m == 0 or poss[l] != i:
+                    gn += 1
+
+    return gp, gn, rw
 
 def closeToWord(stemmed, word, poss, model, statPos):
     xk = [0] * len(stemmed)
@@ -292,7 +333,7 @@ def classify():
         print 'Begin stemming data'
         #l = 351063
         #print parsed[l:l + 2]
-        stemmed, poss, negs, statHap, statSad = stemData(parsed)
+        stemmed, poss, negs, statHap, statSad, statAll = stemData(parsed)
         #print stemmed
         print 'Begin training'
         model = Doc2Vec(documents=stemmed)#, size=100, workers=4, window=5, min_count=5)
@@ -312,14 +353,41 @@ def classify():
     print "Train Classifier"
     from sklearn.ensemble import RandomForestClassifier
     Pos = RandomForestClassifier()
-    for entry in statHap:
-        if statHap[entry] < 5:
-            del statHap[entry]
-    for entry in statSad:
-        if statSad[entry] < 5:
-            del statSad[entry]
-    x, y = closeToWord(stemmed, happy, poss, model, statHap)
-    Pos.fit(x, y)
+    totPos = 0
+    tot = 0
+    mrg = 20
+    for word in statAll:
+        if statAll[word] != 0 and word in statHap:
+            totPos += statHap[word]
+        tot += statAll[word]
+    mrg = float(totPos) / tot
+    coef = 5
+    for entry in statHap.keys():
+        try:
+            if statHap[entry] < 7:#float(statHap[entry]) / statAll[entry] < mrg * coef:
+                del statHap[entry]
+        except Exception:
+            pass
+    for entry in statSad.keys():
+        try:
+            if statSad[entry] < 7:#float(statSad[entry]) / statAll[entry] < mrg * coef:
+                del statSad[entry]
+        except Exception:
+            pass
+    for w in statHap.keys():
+        if statHap[w] > 50:
+            print w
+
+
+    return
+
+
+
+    for w in statHap.keys():
+       if w in statSad:
+           del statHap[w]
+#    x, y = closeToWord(stemmed, happy, poss, model, statHap)
+#    Pos.fit(x, y)
     print "Done with happy" 
     try:
         import gc
@@ -336,9 +404,10 @@ def classify():
         gc.collect()
     print 'Test'
     tparsed = parseData(testData)
-    tstemmed, tposs, tnegs = stemData(tparsed)
+    tstemmed, tposs, tnegs, a, b, c = stemData(tparsed)
     print "Begin testing"
-    xp, yp, rp = testRandForest(Pos, model, tstemmed, tposs)
+    xp, yp, rp = testRandForest(Pos, model, tstemmed, tposs, statHap)
+#    xp, yp, rp = testRandForest2(tstemmed, tposs, statHap, statSad)
 #    xn, yn, rn = testRandForest(Neg, model, tstemmed, tnegs)
     print "guessedPos: ", xp, " guessedNeut: ", yp
     print "Total pos: ", len(tposs), "Total: ", len(tstemmed)
