@@ -1,0 +1,2 @@
+guessedPos:  1084  guessedNeut:  1000059
+Total pos:  10914 Total:  1011582
