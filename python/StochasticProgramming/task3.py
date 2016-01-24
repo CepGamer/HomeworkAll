@@ -121,6 +121,7 @@ if __name__ == "__main__":
         for i, x in enumerate(arr):
             if x > m[1]:
                 m = i, x
-        print "Best num: " + str(m[0])
-        km.getImg(w, m[0] + minK)
+        print "Best num: " + str(m[0] + minK)
+        res = w.reshape(km.getShape(inputf))
+        Image.fromarray(res).save("out{}.jpg".format(m[0] + minK))
 
