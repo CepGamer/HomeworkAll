@@ -5,13 +5,10 @@ import numpy
 import random
 import copy
 
-inputf = 'peppers.jpg'
-output = 'out{}.jpg'
-
-image = numpy.array(Image.open(inputf))
-dots = image.reshape((image.shape[0] * image.shape[1], image.shape[2]))
-
-# res
+def readImg(inputf):
+    image = numpy.array(Image.open(inputf))
+    dots = image.reshape((image.shape[0] * image.shape[1], image.shape[2]))
+    return dots
 
 def selectKRand(w, k):
     random.seed()
@@ -47,6 +44,21 @@ def classify(w, centres):
         ret += [mini]
     return ret
 
+def barycenter(w):
+    center = numpy.array((0.0, 0.0, 0.0))
+    count = 0
+    for i, x in enumerate(w):
+        for ind in range(0, x.size):
+            a = x[ind].astype(int)
+            center[ind] += a
+        count += 1
+    for y in range(0, center.size):
+        try:
+            center[y] /= count
+        except Exception:
+            pass
+    return center
+
 def minimisation(w, clusters, k):
     mins = []
     for i in range(0, k):
@@ -59,7 +71,10 @@ def minimisation(w, clusters, k):
         count[clusters[i]] += 1
     for i in range(0, len(mins)):
         for y in range(0, mins[0].size):
-            mins[i][y] /= count[i]
+            try:
+                mins[i][y] /= count[i]
+            except Exception:
+                pass
     return mins
 
 def kmeans(w, k, max = 15):
@@ -91,12 +106,15 @@ def kmeans(w, k, max = 15):
             func += (a - b) * (a - b)
     return (func, clusters, mins)
 
-def getImg():
+def getImg(dots, clustersCount = -1):
     kmeanses = 5
     color = []
+    output = 'out{}.jpg'
     
     for k in range(2, 4):
         W = copy.deepcopy(dots)
+        if clustersCount != -1:
+            k = clustersCount
         val, clusters, color = kmeans(W, k)
         bestClusters = clusters
         for i in range(1, kmeanses):
@@ -111,5 +129,8 @@ def getImg():
     
         res = W.reshape(image.shape)
         Image.fromarray(res).save(output.format(k))
+        if clustersCount != -1:
+            return res
 
-getImg()
+if __name__ = "main":
+    getImg(readImg("peppers.jpg"))
