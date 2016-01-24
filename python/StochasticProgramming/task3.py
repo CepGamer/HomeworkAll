@@ -2,6 +2,7 @@ __author__ = 'Sergei Bolotov'
 
 import task2 as km
 import numpy as np
+from math import sqrt
 
 def bgss(w, clusters, centers, ns, degree = 2):
     g = km.barycenter(w)
@@ -23,18 +24,19 @@ def readExt(inputf):
     s = f.read().split("\r\n")
     if s[-1] == '':
         s = s[:-1]
-    res = [0] * len(s)
-    for i, vals in range(len(s)):
+    res = np.empty([len(s), len(s[0].split(' ')) - 1])
+    ideal = [0] * len(s)
+    for i, vals in enumerate(s):
         x = vals.split(' ')
-        res[i] = (int(x[0]), np.array((float(x[1]), float(x[2]))))
-        
-    return res
+        res[i] = np.array((float(x[1]), float(x[2])))
+        ideal[i] = int(x[0])
+    
+    return ideal, res
 
 if __name__ == "__main__":
     inputf = "peppers.jpg"
     w = km.readImg(inputf)
-        
-    minK, maxK = 1, 2
+    minK, maxK = 2, 2
 
     # init indices
     DavBoul  = [0] * (maxK - minK + 1)
@@ -79,20 +81,31 @@ if __name__ == "__main__":
             DavBoul[k - minK] /= k
             
             # External prelim
-            externals = readExt("task_3_data_7.txt")
-            
+            ideal, externals = readExt("task_3_data_7.txt")
+            x, clusters, y = km.kmeans(externals, k)
+
             yy = 0
             yn = 0
             ny = 0
             nn = 0
-            
-            for i in range(len(clusters)):
-                for j in range(i + 1, len(clusters)):
+            for i in range(len(ideal)):
+                for j in range(i + 1, len(ideal)):
+                    if ideal[i] == ideal[j]:
+                        if clusters[i] == clusters[j]:
+                            yy += 1
+                        else:
+                            yn += 1
+                    else:
+                        if clusters[i] == clusters[j]:
+                            ny += 1
+                        else:
+                            nn += 1
             
             # Rand count
-            
+            Rand[k - minK] = (yy + nn) / len(clusters)
             
             # FowMal count
+            FowMal[k - minK] = yy / (sqrt((yy + yn) * (yy + ny)))
             
         except Exception:
             pass
@@ -102,3 +115,12 @@ if __name__ == "__main__":
     print "CalHar: " + str(CalHar)
     print "Rand: " + str(Rand)
     print "FowMal: " + str(FowMal)
+    
+    for arr in [DavBoul, CalHar]:
+        m = (0, 0)
+        for i, x in enumerate(arr):
+            if x > m[1]:
+                m = i, x
+        print "Best num: " + str(m[0])
+        km.getImg(w, m[0] + minK)
+
