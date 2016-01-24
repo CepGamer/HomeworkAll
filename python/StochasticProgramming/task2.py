@@ -10,6 +10,10 @@ def readImg(inputf):
     dots = image.reshape((image.shape[0] * image.shape[1], image.shape[2]))
     return dots
 
+def getShape(inputf):
+    image = numpy.array(Image.open(inputf))
+    return image.shape
+
 def selectKRand(w, k):
     random.seed()
     n = w.size / w[0].size
@@ -45,7 +49,7 @@ def classify(w, centres):
     return ret
 
 def barycenter(w):
-    center = numpy.array((0.0, 0.0, 0.0))
+    center = numpy.zeros(w[0].size)
     count = 0
     for i, x in enumerate(w):
         for ind in range(0, x.size):
@@ -62,7 +66,7 @@ def barycenter(w):
 def minimisation(w, clusters, k):
     mins = []
     for i in range(0, k):
-        mins += [numpy.array((0.0, 0.0, 0.0))]
+        mins += [numpy.zeros(w[0].size)]
     count = [0] * k
     for i, x in enumerate(w):
         for ind in range(0, x.size):
@@ -132,5 +136,5 @@ def getImg(dots, clustersCount = -1):
         if clustersCount != -1:
             return res
 
-if __name__ = "main":
+if __name__ == "main":
     getImg(readImg("peppers.jpg"))
