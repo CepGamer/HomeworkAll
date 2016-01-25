@@ -4,7 +4,7 @@ import task2 as km
 import numpy as np
 from math import sqrt
 
-def bgss(w, clusters, centers, ns, degree = 2):
+def bgss(w, centers, ns, degree = 2):
     g = km.barycenter(w)
     res = 0
     for i, c in enumerate(centers):
@@ -15,8 +15,9 @@ def bgss(w, clusters, centers, ns, degree = 2):
 def wgss(w, clusters, center, clustNum, degree = 2):
     res = 0
     for i, x in enumerate(w):
-        t = pow(np.linalg.norm(x - center), degree)
-        res += t
+        if clustNum == clusters[i]:
+            t = pow(np.linalg.norm(x - center), degree)
+            res += t
     return res
 
 def readExt(inputf):
@@ -36,7 +37,7 @@ def readExt(inputf):
 if __name__ == "__main__":
     inputf = "peppers.jpg"
     w = km.readImg(inputf)
-    minK, maxK = 2, 2
+    minK, maxK = 2, 20
 
     # init indices
     DavBoul  = [0] * (maxK - minK + 1)
@@ -63,7 +64,7 @@ if __name__ == "__main__":
     
             # CalHar count
             wgssSum = 0
-            bgssSum = bgss(w, clusters, centers, ns)
+            bgssSum = bgss(w, centers, ns)
             for i in range(k):
                 wgssSum += wgss(w, clusters, centers[i], i)
             CalHar[k - minK] = bgssSum * (len(clusters) - k) / (wgssSum * (k - 1))
@@ -77,8 +78,7 @@ if __name__ == "__main__":
                 for j in range(k):
                     if i != j:
                         t = max(t, (meanDists[i] + meanDists[j]) / np.linalg.norm(centers[i] - centers[j]))
-                DavBoul[k - minK] += t
-            DavBoul[k - minK] /= k
+                DavBoul[k - minK] += t / k
             
             # External prelim
             ideal, externals = readExt("task_3_data_7.txt")
@@ -122,6 +122,4 @@ if __name__ == "__main__":
             if x > m[1]:
                 m = i, x
         print "Best num: " + str(m[0] + minK)
-        res = w.reshape(km.getShape(inputf))
-        Image.fromarray(res).save("out{}.jpg".format(m[0] + minK))
-
+        km.getImg(inputf, m[0] + minK)

@@ -81,7 +81,7 @@ def minimisation(w, clusters, k):
                 pass
     return mins
 
-def kmeans(w, k, max = 15):
+def kmeans(w, k, max = 50):
     # STEP 1
     centres = selectKRand(w, k)
     # STEP 2
@@ -110,10 +110,11 @@ def kmeans(w, k, max = 15):
             func += (a - b) * (a - b)
     return (func, clusters, mins)
 
-def getImg(dots, clustersCount = -1):
-    kmeanses = 5
+def getImg(inputf, clustersCount = -1):
+    kmeanses = 10
     color = []
     output = 'out{}.jpg'
+    dots = readImg(inputf)
     
     for k in range(2, 4):
         W = copy.deepcopy(dots)
@@ -131,10 +132,10 @@ def getImg(dots, clustersCount = -1):
         for i in range(W.size / W[0].size):
             W[i] = color[bestClusters[i]]
     
-        res = W.reshape(image.shape)
+        res = W.reshape(getShape(inputf))
         Image.fromarray(res).save(output.format(k))
         if clustersCount != -1:
             return res
 
-if __name__ == "main":
-    getImg(readImg("peppers.jpg"))
+if __name__ == "__main__":
+    getImg("peppers.jpg")
